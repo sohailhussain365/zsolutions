@@ -1,0 +1,10 @@
+{
+  "buildCommand": "pnpm run typecheck && PORT=3000 BASE_PATH=/ pnpm --filter @workspace/zsolutionz run build",
+  "outputDirectory": "artifacts/zsolutionz/dist/public",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
