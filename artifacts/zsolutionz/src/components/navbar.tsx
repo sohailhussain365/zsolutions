@@ -46,7 +46,7 @@ export function Navbar() {
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.6, ease: [0.22,1,0.36,1] as [number, number, number, number] }}
         className={`fixed top-[2px] left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
             ? "py-3 bg-[#0A0F1E]/90 backdrop-blur-xl border-b border-white/[0.07] shadow-[0_4px_32px_rgba(0,0,0,0.4)]"
@@ -120,7 +120,7 @@ export function Navbar() {
               initial={{ opacity: 0, height: 0, y: -10 }}
               animate={{ opacity: 1, height: "auto", y: 0 }}
               exit={{ opacity: 0, height: 0, y: -10 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.3, ease: [0.22,1,0.36,1] as [number, number, number, number] }}
               className="md:hidden overflow-hidden bg-[#0A0F1E]/97 backdrop-blur-xl border-b border-white/[0.07]"
             >
               <motion.div
