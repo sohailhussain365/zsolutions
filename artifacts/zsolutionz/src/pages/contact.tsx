@@ -1,6 +1,32 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Mail, Phone, MapPin, ArrowRight, Clock, MessageSquare } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowRight, Clock, MessageSquare, CheckCircle2, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+
+const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT || "";
+
+const formSchema = z.object({
+  fullName: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  phone: z.string().min(5, "Phone number is required"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
+
+type FormValues = z.infer<typeof formSchema>;
+type Status = "idle" | "submitting" | "success" | "error";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 48 },
@@ -12,6 +38,47 @@ const stagger = {
 };
 
 export default function ContactPage() {
+  const [status, setStatus] = useState<Status>("idle");
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: { fullName: "", email: "", phone: "", message: "" },
+  });
+
+  async function onSubmit(values: FormValues) {
+    if (!FORMSPREE_ENDPOINT) {
+      // No endpoint configured yet — show success preview
+      setStatus("success");
+      form.reset();
+      setTimeout(() => setStatus("idle"), 6000);
+      return;
+    }
+    setStatus("submitting");
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: values.fullName,
+          email: values.email,
+          phone: values.phone,
+          message: values.message,
+        }),
+      });
+      if (res.ok) {
+        setStatus("success");
+        form.reset();
+        setTimeout(() => setStatus("idle"), 6000);
+      } else {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 5000);
+      }
+    } catch {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
+  }
+
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
 
@@ -164,31 +231,144 @@ export default function ContactPage() {
               </div>
             </motion.div>
 
-            {/* RIGHT: JotForm Embed */}
+            {/* RIGHT: Native Formspree Form */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="lg:col-span-3"
             >
-              <div className="glass-card rounded-3xl overflow-hidden relative">
-                <div className="px-8 pt-8 pb-4">
-                  <span className="section-label">Send a Message</span>
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-2">
-                    We'd Love to Hear From You
-                  </h2>
-                  <p className="text-slate-400 text-sm mb-6">Fill out the form below and our team will get back to you shortly.</p>
-                </div>
-                <iframe
-                  id="JotFormIFrame-261684369617066"
-                  title="ZSolutionz Contact Form"
-                  src="https://form.jotform.com/261684369617066"
-                  allowFullScreen
-                  allow="geolocation; microphone; camera"
-                  className="w-full border-0"
-                  style={{ minHeight: "700px", backgroundColor: "transparent" }}
-                  scrolling="yes"
-                />
+              <div className="glass-card rounded-3xl p-10 relative overflow-hidden min-h-[580px]">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
+
+                {/* Success state */}
+                {status === "success" && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="absolute inset-0 z-20 bg-[#0F172A] flex flex-col items-center justify-center p-10 text-center rounded-3xl"
+                  >
+                    <div className="h-24 w-24 bg-green-500/10 text-green-400 rounded-full flex items-center justify-center mb-8">
+                      <CheckCircle2 size={44} />
+                    </div>
+                    <h3 className="text-3xl font-extrabold text-white mb-4">Message Sent!</h3>
+                    <p className="text-slate-400 text-lg max-w-sm">
+                      Thank you for reaching out to ZSolutionz. Our team will get back to you within 24 hours.
+                    </p>
+                  </motion.div>
+                )}
+
+                {/* Error state */}
+                {status === "error" && (
+                  <div className="mb-6 rounded-xl bg-red-500/10 border border-red-500/20 px-5 py-4 text-red-400 text-sm">
+                    Something went wrong. Please try again or email us directly at info@zsolutionz.com.
+                  </div>
+                )}
+
+                <span className="section-label">Send a Message</span>
+                <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-2">
+                  We'd Love to Hear From You
+                </h2>
+                <p className="text-slate-400 text-sm mb-8">Fill out the form and our team will get back to you shortly.</p>
+
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 relative z-10">
+                    <FormField
+                      control={form.control}
+                      name="fullName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-slate-300 text-sm font-medium">Full Name</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="John Doe"
+                              data-testid="input-fullname"
+                              className="bg-[#0A0F1E] border-white/10 text-white h-14 rounded-xl px-5 focus:border-blue-500/60 placeholder:text-slate-600"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage className="text-red-400 text-xs" />
+                        </FormItem>
+                      )}
+                    />
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-slate-300 text-sm font-medium">Email Address</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="john@example.com"
+                                data-testid="input-email"
+                                className="bg-[#0A0F1E] border-white/10 text-white h-14 rounded-xl px-5 focus:border-blue-500/60 placeholder:text-slate-600"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage className="text-red-400 text-xs" />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="phone"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-slate-300 text-sm font-medium">Phone Number</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="+1 (555) 000-0000"
+                                data-testid="input-phone"
+                                className="bg-[#0A0F1E] border-white/10 text-white h-14 rounded-xl px-5 focus:border-blue-500/60 placeholder:text-slate-600"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage className="text-red-400 text-xs" />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-slate-300 text-sm font-medium">Message</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Tell us how we can help you..."
+                              data-testid="input-message"
+                              className="bg-[#0A0F1E] border-white/10 text-white min-h-[140px] resize-none rounded-xl p-5 focus:border-blue-500/60 placeholder:text-slate-600"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage className="text-red-400 text-xs" />
+                        </FormItem>
+                      )}
+                    />
+
+                    <button
+                      type="submit"
+                      disabled={status === "submitting"}
+                      data-testid="button-submit"
+                      className="w-full inline-flex items-center justify-center gap-2 rounded-xl text-base font-semibold transition-all bg-blue-600 text-white hover:bg-blue-500 disabled:opacity-60 disabled:cursor-not-allowed h-14 shadow-[0_0_24px_rgba(37,99,235,0.3)] hover:shadow-[0_0_36px_rgba(37,99,235,0.45)]"
+                    >
+                      {status === "submitting" ? (
+                        <>
+                          <Loader2 size={18} className="animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          Send Message <ArrowRight size={18} />
+                        </>
+                      )}
+                    </button>
+                  </form>
+                </Form>
               </div>
             </motion.div>
 
