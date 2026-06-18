@@ -15,14 +15,14 @@ import aboutTechBg from "@/assets/about-tech.png";
 /* ── Variants ──────────────────────────────────────────── */
 const fadeUp = {
   hidden:  { opacity: 0, y: 56 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22,1,0.36,1] as [number, number, number, number] } },
 };
 const stagger = {
   hidden:  { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.13 } },
 };
-const fadeLeft  = { hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: [0.22,1,0.36,1] } } };
-const fadeRight = { hidden: { opacity: 0, x:  50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: [0.22,1,0.36,1] } } };
+const fadeLeft  = { hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
+const fadeRight = { hidden: { opacity: 0, x:  50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
 
 /* Word-reveal split animation */
 function WordReveal({ text, className = "" }: { text: string; className?: string }) {
@@ -38,7 +38,7 @@ function WordReveal({ text, className = "" }: { text: string; className?: string
         <motion.span
           key={i}
           className="inline-block mr-[0.25em]"
-          variants={{ hidden: { opacity: 0, y: 40, filter: "blur(6px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.6, ease: [0.22,1,0.36,1] } } }}
+          variants={{ hidden: { opacity: 0, y: 40, filter: "blur(6px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.6, ease: [0.22,1,0.36,1] as [number, number, number, number] } } }}
         >
           {w}
         </motion.span>
@@ -167,7 +167,7 @@ export default function HomePage() {
             <motion.div
               initial={{ opacity: 0, x: 60 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.9, delay: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] }}
               className="hidden lg:flex lg:col-span-5 flex-col gap-4"
             >
               {[
@@ -179,7 +179,7 @@ export default function HomePage() {
                   key={i}
                   initial={{ opacity: 0, x: 40, y: 20 }}
                   animate={{ opacity: 1, x: 0, y: 0 }}
-                  transition={{ delay: 0.7 + i * 0.15, duration: 0.6, ease: [0.22,1,0.36,1] }}
+                  transition={{ delay: 0.7 + i * 0.15, duration: 0.6, ease: [0.22,1,0.36,1] as [number, number, number, number] }}
                   whileHover={{ scale: 1.03, y: -4 }}
                   className="glass-card rounded-2xl p-6 flex items-center gap-5 cursor-default group"
                 >
