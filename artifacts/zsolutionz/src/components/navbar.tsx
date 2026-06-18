@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logoImg from "@assets/1024x1024-transparent_1781795911795.png";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [location] = useLocation();
+
+  const isHeroPage = location === "/" || location === "/about" || location === "/join" || location === "/contact";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,40 +19,46 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
+  // Close mobile menu on route change
+  useEffect(() => {
     setIsMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  }, [location]);
+
+  const navClass = isScrolled || !isHeroPage
+    ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm py-4"
+    : "bg-transparent py-6";
+
+  const links = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About Us" },
+    { href: "/join", label: "Join Us" },
+    { href: "/contact", label: "Contact Us" },
+  ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/90 backdrop-blur-md border-b border-border shadow-sm py-4"
-          : "bg-transparent py-6"
-      }`}
-    >
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navClass}`}>
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        <a 
-          href="#home" 
-          onClick={(e) => { e.preventDefault(); scrollToSection("home"); }}
-          className="text-2xl font-bold text-white tracking-tight"
-        >
-          ZSolutionz
-        </a>
+        <Link href="/" className="flex items-center gap-3">
+          <img src={logoImg} alt="ZSolutionz Logo" className="h-10 w-auto" />
+          <span className="text-xl font-bold text-white tracking-tight">ZSolutionz</span>
+        </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
-          <button onClick={() => scrollToSection("home")} className="text-sm font-medium text-white/80 hover:text-white transition-colors">Home</button>
-          <button onClick={() => scrollToSection("about")} className="text-sm font-medium text-white/80 hover:text-white transition-colors">About Us</button>
-          <button onClick={() => scrollToSection("join")} className="text-sm font-medium text-white/80 hover:text-white transition-colors">Join Us</button>
-          <button onClick={() => scrollToSection("contact")} className="text-sm font-medium text-white/80 hover:text-white transition-colors">Contact Us</button>
-          <Button onClick={() => scrollToSection("contact")} className="bg-primary hover:bg-primary/90 text-white rounded-full px-6">
+          {links.map((link) => (
+            <Link 
+              key={link.href} 
+              href={link.href}
+              className={`text-sm font-medium transition-colors hover:text-white ${
+                location === link.href ? "text-primary" : "text-white/70"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link href="/contact" className="inline-flex items-center justify-center rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-10 py-2 px-6">
             Contact Us
-          </Button>
+          </Link>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -63,13 +73,20 @@ export function Navbar() {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-border p-4 flex flex-col space-y-4 shadow-lg">
-          <button onClick={() => scrollToSection("home")} className="text-left text-sm font-medium text-white/80 hover:text-white py-2">Home</button>
-          <button onClick={() => scrollToSection("about")} className="text-left text-sm font-medium text-white/80 hover:text-white py-2">About Us</button>
-          <button onClick={() => scrollToSection("join")} className="text-left text-sm font-medium text-white/80 hover:text-white py-2">Join Us</button>
-          <button onClick={() => scrollToSection("contact")} className="text-left text-sm font-medium text-white/80 hover:text-white py-2">Contact Us</button>
-          <Button onClick={() => scrollToSection("contact")} className="bg-primary hover:bg-primary/90 text-white w-full">
+          {links.map((link) => (
+            <Link 
+              key={link.href} 
+              href={link.href}
+              className={`text-left text-sm font-medium py-2 ${
+                location === link.href ? "text-primary" : "text-white/70 hover:text-white"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link href="/contact" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-10 py-2 px-4 w-full">
             Contact Us
-          </Button>
+          </Link>
         </div>
       )}
     </nav>
