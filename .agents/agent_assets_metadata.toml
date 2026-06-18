@@ -1,0 +1,26 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "V8DKTrPUnh8fL1hljnDLe"
+uri = "file://artifacts/zsolutionz/src/assets/hero-bg.png"
+type = "image"
+title = "Hero background call center"
+
+[[generated]]
+id = "m6Vidkc_1apDFIGfBJg_T"
+uri = "file://artifacts/zsolutionz/src/assets/mission-bg.png"
+type = "image"
+title = "Mission background people working"
+
+[[generated]]
+id = "GIGTHXfv66x6pYuWPb4nx"
+uri = "file://artifacts/zsolutionz/src/assets/about-tech.png"
+type = "image"
+title = "About abstract tech"
+
+[[generated]]
+id = "zpccMTcvhTagUyXncEqJ1"
+uri = "file://artifacts/zsolutionz/src/assets/join-bg.png"
+type = "image"
+title = "Join team background"
