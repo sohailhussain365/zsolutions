@@ -1,27 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Mail, Phone, MapPin, CheckCircle2, ArrowRight, Clock, MessageSquare } from "lucide-react";
-import { useState } from "react";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-
-const formSchema = z.object({
-  fullName: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  phone: z.string().min(5, "Phone number is required"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-});
+import { Mail, Phone, MapPin, ArrowRight, Clock, MessageSquare } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 48 },
@@ -33,19 +12,6 @@ const stagger = {
 };
 
 export default function ContactPage() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: { fullName: "", email: "", phone: "", message: "" },
-  });
-
-  function onSubmit(_values: z.infer<typeof formSchema>) {
-    setIsSubmitted(true);
-    form.reset();
-    setTimeout(() => setIsSubmitted(false), 8000);
-  }
-
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
 
@@ -60,7 +26,6 @@ export default function ContactPage() {
           }}
         />
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#0A0F1E] via-transparent to-[#0A0F1E]" />
-        {/* Radial glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-600/8 rounded-full blur-3xl pointer-events-none z-0" />
 
         <div className="container relative z-10 mx-auto px-6 lg:px-12">
@@ -199,132 +164,39 @@ export default function ContactPage() {
               </div>
             </motion.div>
 
-            {/* RIGHT: Contact Form */}
+            {/* RIGHT: JotForm Embed */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="lg:col-span-3 relative"
+              className="lg:col-span-3"
             >
-              <div className="glass-card rounded-3xl p-10 relative overflow-hidden min-h-[600px]">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
-
-                <span className="section-label">Send a Message</span>
-                <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-8">
-                  We'd Love to Hear From You
-                </h2>
-
-                {isSubmitted ? (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="absolute inset-0 z-20 bg-[#0F172A] flex flex-col items-center justify-center p-10 text-center rounded-3xl"
-                  >
-                    <div className="h-24 w-24 bg-green-500/10 text-green-400 rounded-full flex items-center justify-center mb-8">
-                      <CheckCircle2 size={44} />
-                    </div>
-                    <h3 className="text-3xl font-extrabold text-white mb-4">Message Sent!</h3>
-                    <p className="text-slate-400 text-lg max-w-sm">
-                      Thank you for reaching out to ZSolutionz. Our team will get back to you within 24 hours.
-                    </p>
-                  </motion.div>
-                ) : null}
-
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 relative z-10">
-                    <FormField
-                      control={form.control}
-                      name="fullName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-slate-300 text-sm font-medium">Full Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="John Doe"
-                              data-testid="input-fullname"
-                              className="bg-[#0A0F1E] border-white/10 text-white h-14 rounded-xl px-5 focus:border-blue-500/50 focus:ring-blue-500/20 placeholder:text-slate-600"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage className="text-red-400 text-xs" />
-                        </FormItem>
-                      )}
-                    />
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <FormField
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-slate-300 text-sm font-medium">Email Address</FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="john@example.com"
-                                data-testid="input-email"
-                                className="bg-[#0A0F1E] border-white/10 text-white h-14 rounded-xl px-5 focus:border-blue-500/50 focus:ring-blue-500/20 placeholder:text-slate-600"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage className="text-red-400 text-xs" />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="phone"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-slate-300 text-sm font-medium">Phone Number</FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="+1 (555) 000-0000"
-                                data-testid="input-phone"
-                                className="bg-[#0A0F1E] border-white/10 text-white h-14 rounded-xl px-5 focus:border-blue-500/50 focus:ring-blue-500/20 placeholder:text-slate-600"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage className="text-red-400 text-xs" />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-
-                    <FormField
-                      control={form.control}
-                      name="message"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-slate-300 text-sm font-medium">Message</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder="Tell us how we can help you..."
-                              data-testid="input-message"
-                              className="bg-[#0A0F1E] border-white/10 text-white min-h-[140px] resize-none rounded-xl p-5 focus:border-blue-500/50 focus:ring-blue-500/20 placeholder:text-slate-600"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage className="text-red-400 text-xs" />
-                        </FormItem>
-                      )}
-                    />
-
-                    <button
-                      type="submit"
-                      data-testid="button-submit"
-                      className="w-full inline-flex items-center justify-center gap-2 rounded-xl text-base font-semibold transition-all bg-blue-600 text-white hover:bg-blue-500 h-14 shadow-[0_0_24px_rgba(37,99,235,0.3)] hover:shadow-[0_0_36px_rgba(37,99,235,0.45)]"
-                    >
-                      Send Message <ArrowRight size={18} />
-                    </button>
-                  </form>
-                </Form>
+              <div className="glass-card rounded-3xl overflow-hidden relative">
+                <div className="px-8 pt-8 pb-4">
+                  <span className="section-label">Send a Message</span>
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-2">
+                    We'd Love to Hear From You
+                  </h2>
+                  <p className="text-slate-400 text-sm mb-6">Fill out the form below and our team will get back to you shortly.</p>
+                </div>
+                <iframe
+                  id="JotFormIFrame-261684369617066"
+                  title="ZSolutionz Contact Form"
+                  src="https://form.jotform.com/261684369617066"
+                  allowFullScreen
+                  allow="geolocation; microphone; camera"
+                  className="w-full border-0"
+                  style={{ minHeight: "700px", backgroundColor: "transparent" }}
+                  scrolling="yes"
+                />
               </div>
             </motion.div>
+
           </div>
         </div>
       </section>
 
-      {/* ── FAQ / ABOUT STRIP ──────────────────────────────────── */}
+      {/* ── BOTTOM INFO STRIP ──────────────────────────────────── */}
       <section className="py-24 bg-[#0F172A] border-t border-white/[0.07]">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -342,7 +214,7 @@ export default function ContactPage() {
               {
                 title: "Service Questions",
                 desc: "Need help with internet solutions or connectivity? Our expert team is ready to guide you through every option.",
-                icon: CheckCircle2,
+                icon: MessageSquare,
               },
             ].map((item, i) => (
               <motion.div

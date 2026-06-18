@@ -221,13 +221,13 @@ export default function JoinPage() {
                   ))}
                 </ul>
 
-                <a
-                  href="mailto:info@zsolutionz.com?subject=Job Application"
+                <Link
+                  href="/contact"
                   data-testid={`link-apply-${i}`}
                   className="mt-auto inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 text-white font-semibold h-12 px-6 hover:bg-blue-500 transition-colors w-full"
                 >
                   Apply Now <ArrowRight size={16} />
-                </a>
+                </Link>
               </motion.div>
             ))}
           </motion.div>
@@ -285,7 +285,7 @@ export default function JoinPage() {
                   Contact Us <ArrowRight size={18} />
                 </Link>
                 <a href="mailto:info@zsolutionz.com?subject=Job Application" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 text-white font-semibold h-14 px-10 hover:bg-white/10 transition-colors">
-                  Email Your Resume
+                  Email Us Directly
                 </a>
               </div>
             </motion.div>
