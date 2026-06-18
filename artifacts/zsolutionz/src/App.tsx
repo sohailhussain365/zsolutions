@@ -13,35 +13,40 @@ import ContactPage from "@/pages/contact";
 
 const queryClient = new QueryClient();
 
+const pageVariants = {
+  initial: { opacity: 0, y: 28, filter: "blur(4px)" },
+  enter:   { opacity: 1, y: 0,  filter: "blur(0px)", transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+  exit:    { opacity: 0, y: -14, filter: "blur(2px)", transition: { duration: 0.3,  ease: [0.55, 0, 1, 0.45] } },
+};
+
+function PageWrapper({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div variants={pageVariants} initial="initial" animate="enter" exit="exit">
+      {children}
+    </motion.div>
+  );
+}
+
 function Router() {
   const [location] = useLocation();
-
   return (
     <Layout>
       <AnimatePresence mode="wait">
         <Switch location={location} key={location}>
           <Route path="/">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-              <HomePage />
-            </motion.div>
+            <PageWrapper><HomePage /></PageWrapper>
           </Route>
           <Route path="/about">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-              <AboutPage />
-            </motion.div>
+            <PageWrapper><AboutPage /></PageWrapper>
           </Route>
           <Route path="/join">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-              <JoinPage />
-            </motion.div>
+            <PageWrapper><JoinPage /></PageWrapper>
           </Route>
           <Route path="/contact">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-              <ContactPage />
-            </motion.div>
+            <PageWrapper><ContactPage /></PageWrapper>
           </Route>
           <Route>
-            <NotFound />
+            <PageWrapper><NotFound /></PageWrapper>
           </Route>
         </Switch>
       </AnimatePresence>
