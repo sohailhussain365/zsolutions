@@ -25,7 +25,7 @@ export default function AboutPage() {
     <div className="flex flex-col w-full overflow-x-hidden">
 
       {/* ── HERO ──────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative min-h-[65vh] flex items-end pb-20 pt-40 overflow-hidden">
+      <section ref={heroRef} className="relative min-h-[65vh] flex items-end pb-16 pt-32 md:pb-20 md:pt-40 overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0 z-0">
           <img src={heroBg} alt="" className="w-full h-full object-cover object-center scale-110" />
           <div className="absolute inset-0 bg-[#0A0F1E]/82" />
@@ -47,7 +47,7 @@ export default function AboutPage() {
               <span className="h-2 w-2 rounded-full bg-blue-400 animate-pulse" />
               Who We Are
             </div>
-            <h1 className="font-extrabold text-white tracking-tight leading-[1.03] mb-6" style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}>
+            <h1 className="font-extrabold text-white tracking-tight leading-[1.03] mb-6" style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}>
               About{" "}
               <span className="gradient-text">ZSolutionz</span>
             </h1>
@@ -59,10 +59,10 @@ export default function AboutPage() {
       </section>
 
       {/* ── WHO WE ARE ──────────────────────────────────────── */}
-      <section className="py-32 bg-[#0A0F1E] relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-[#0A0F1E] relative overflow-hidden">
         <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeLeft}>
               <span className="section-label">Who We Are</span>
               <h2 className="font-extrabold text-white leading-tight mb-8" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>
@@ -123,10 +123,10 @@ export default function AboutPage() {
       </section>
 
       {/* ── MISSION ─────────────────────────────────────────── */}
-      <section className="py-32 bg-[#0F172A] border-y border-white/[0.07] relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-[#0F172A] border-y border-white/[0.07] relative overflow-hidden">
         <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeLeft}>
               <span className="section-label">Our Mission</span>
               <h2 className="font-extrabold text-white leading-tight mb-8" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>
@@ -178,10 +178,10 @@ export default function AboutPage() {
       </section>
 
       {/* ── VISION / MISSION / PURPOSE ──────────────────────── */}
-      <section className="py-32 bg-[#0A0F1E] relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-[#0A0F1E] relative overflow-hidden">
         <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-24">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-12 md:mb-24">
             <span className="section-label">Our Foundation</span>
             <h2 className="font-extrabold text-white mb-6" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>Vision, Mission &amp; Purpose</h2>
             <p className="text-slate-400 text-lg">Three pillars that guide every decision we make and every customer we serve.</p>
@@ -209,10 +209,10 @@ export default function AboutPage() {
       </section>
 
       {/* ── CORE VALUES ─────────────────────────────────────── */}
-      <section className="py-32 bg-[#0F172A] border-t border-white/[0.07] relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-[#0F172A] border-t border-white/[0.07] relative overflow-hidden">
         <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-24">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-12 md:mb-24">
             <span className="section-label">What We Stand For</span>
             <h2 className="font-extrabold text-white mb-6" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>Our Core Values</h2>
             <p className="text-slate-400 text-lg">The principles that define our culture and guide our work every day.</p>
@@ -242,11 +242,11 @@ export default function AboutPage() {
       </section>
 
       {/* ── CTA ─────────────────────────────────────────────── */}
-      <section className="py-24 bg-[#0A0F1E] border-t border-white/[0.07] relative overflow-hidden">
+      <section className="py-12 md:py-24 bg-[#0A0F1E] border-t border-white/[0.07] relative overflow-hidden">
         <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            className="rounded-3xl border border-blue-500/20 bg-gradient-to-br from-blue-600/12 via-blue-900/6 to-transparent p-12 md:p-16 text-center relative overflow-hidden"
+            className="rounded-3xl border border-blue-500/20 bg-gradient-to-br from-blue-600/12 via-blue-900/6 to-transparent p-8 md:p-12 lg:p-16 text-center relative overflow-hidden"
           >
             <div className="absolute inset-0 rounded-3xl" style={{ background: "radial-gradient(circle at 50% 0%, rgba(37,99,235,0.08), transparent 70%)" }} />
             <h2 className="font-extrabold text-white mb-4 relative z-10" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
