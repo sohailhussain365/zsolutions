@@ -11,10 +11,10 @@ import aboutTechBg from "@/assets/about-tech.png";
 import missionBg from "@/assets/mission-bg.png";
 import heroBg from "@/assets/hero-bg.png";
 
-const fadeUp    = { hidden: { opacity: 0, y: 52 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
-const fadeLeft  = { hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
-const fadeRight = { hidden: { opacity: 0, x:  50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
-const stagger   = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.12 } } };
+const fadeUp    = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
+const fadeLeft  = { hidden: { opacity: 0, x: -24 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
+const fadeRight = { hidden: { opacity: 0, x: 24 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
+const stagger   = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.07 } } };
 
 export default function AboutPage() {
   const heroRef = useRef<HTMLElement>(null);
@@ -37,7 +37,7 @@ export default function AboutPage() {
         <FloatingOrbs />
 
         <div className="container relative z-10 mx-auto px-6 lg:px-12">
-          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.22,1,0.36,1] as [number, number, number, number] }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] }}>
             <div className="flex items-center gap-2 text-xs font-medium text-slate-600 mb-7">
               <Link href="/" className="hover:text-slate-400 transition-colors">Home</Link>
               <span className="text-slate-700">/</span>
