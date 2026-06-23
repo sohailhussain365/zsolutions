@@ -97,8 +97,6 @@
   0%, 100% { transform: translateX(0px); }
   50%       { transform: translateX(12px); }
 }
-@keyframes orbDrift {
-  0%   { transform: translate(0,    0)   scale(1); }
   33%  { transform: translate(40px, -30px) scale(1.05); }
   66%  { transform: translate(-20px, 25px) scale(0.97); }
   100% { transform: translate(0,    0)   scale(1); }
@@ -135,15 +133,11 @@
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
-@keyframes particleDrift {
-  0%   { transform: translateY(0) translateX(0); opacity: 0; }
   20%  { opacity: 1; }
   80%  { opacity: 0.6; }
   100% { transform: translateY(-120px) translateX(30px); opacity: 0; }
 }
 
-@keyframes bgZoom {
-  from { transform: scale(1); }
   to   { transform: scale(1.1); }
 }
 
@@ -226,17 +220,10 @@
     transform: translateY(0);
   }
 
-  /* Hero bg – smooth zoom instead of parallax */
-  .hero-bg-zoom {
-    animation: bgZoom 18s ease-in-out infinite alternate;
-    transform-origin: center center;
-    will-change: transform;
-  }
 
   /* Float animations */
   .animate-float-y { animation: floatY 5s ease-in-out infinite; }
   .animate-float-x { animation: floatX 7s ease-in-out infinite; }
-  .animate-orb     { animation: orbDrift 18s ease-in-out infinite; }
 
   /* Scan line overlay */
   .scanline::after {
