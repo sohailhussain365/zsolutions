@@ -150,14 +150,66 @@ function OrbitalViz() {
       <motion.div
         animate={{ scale: [1, 1.07, 1], boxShadow: [
           "0 0 0 12px rgba(37,99,235,0.06), 0 0 50px rgba(37,99,235,0.3)",
-          "0 0 0 18px rgba(37,99,235,0.1), 0 0 80px rgba(37,99,235,0.55)",
+          "0 0 0 18px rgba(37,99,235,0.1), 0 0 80px rgba(37,99,235,0.6)",
           "0 0 0 12px rgba(37,99,235,0.06), 0 0 50px rgba(37,99,235,0.3)",
         ]}}
         transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-        className="relative flex items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 z-10"
-        style={{ width: 72, height: 72 }}
+        className="relative flex items-center justify-center rounded-2xl z-10 overflow-hidden"
+        style={{
+          width: 80, height: 80,
+          background: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 55%, #1e3a8a 100%)",
+        }}
       >
-        <Globe size={30} className="text-white" strokeWidth={1.5} />
+        {/* Inner top-left shine */}
+        <div className="absolute inset-0 rounded-2xl" style={{
+          background: "linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 55%)"
+        }} />
+
+        {/* Slow-spin longitude ring overlay */}
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        >
+          <svg viewBox="0 0 80 80" width="80" height="80" fill="none">
+            <ellipse cx="40" cy="40" rx="16" ry="36"
+              stroke="rgba(255,255,255,0.22)" strokeWidth="1.1" />
+          </svg>
+        </motion.div>
+
+        {/* Custom SVG Globe */}
+        <svg viewBox="0 0 44 44" width="46" height="46" fill="none" className="relative z-10">
+          {/* Outer circle */}
+          <circle cx="22" cy="22" r="18" stroke="rgba(255,255,255,0.92)" strokeWidth="1.3" />
+
+          {/* Equator (ellipse for depth) */}
+          <ellipse cx="22" cy="22" rx="18" ry="4.5"
+            stroke="rgba(255,255,255,0.6)" strokeWidth="1" fill="none" />
+
+          {/* Upper latitude band */}
+          <ellipse cx="22" cy="14.5" rx="14" ry="3.2"
+            stroke="rgba(255,255,255,0.42)" strokeWidth="0.85" fill="none" />
+
+          {/* Lower latitude band */}
+          <ellipse cx="22" cy="29.5" rx="14" ry="3.2"
+            stroke="rgba(255,255,255,0.42)" strokeWidth="0.85" fill="none" />
+
+          {/* Vertical axis */}
+          <line x1="22" y1="4" x2="22" y2="40"
+            stroke="rgba(255,255,255,0.6)" strokeWidth="1" />
+
+          {/* Front longitude meridian */}
+          <ellipse cx="22" cy="22" rx="9" ry="18"
+            stroke="rgba(255,255,255,0.72)" strokeWidth="1.1" fill="none" />
+
+          {/* Side meridian (fainter) */}
+          <ellipse cx="22" cy="22" rx="15.5" ry="18"
+            stroke="rgba(255,255,255,0.28)" strokeWidth="0.85" fill="none" />
+
+          {/* Highlight glint */}
+          <circle cx="16" cy="15.5" r="2" fill="rgba(255,255,255,0.72)" />
+          <circle cx="19" cy="13" r="0.9" fill="rgba(255,255,255,0.5)" />
+        </svg>
       </motion.div>
 
       {/* ── Stat Badges ── */}
