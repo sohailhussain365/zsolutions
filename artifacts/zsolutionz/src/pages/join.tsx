@@ -1,6 +1,5 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { useRef } from "react";
 import {
   TrendingUp, Users, Laptop, ArrowRight,
   CheckCircle, Briefcase, MapPin, Clock, DollarSign, Heart
@@ -15,20 +14,17 @@ const fadeRight = { hidden: { opacity: 0, x: 24 }, visible: { opacity: 1, x: 0, 
 const stagger   = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.08 } } };
 
 export default function JoinPage() {
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
 
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
 
       {/* ── HERO ──────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative min-h-[65vh] flex items-end pb-16 pt-32 md:pb-20 md:pt-40 overflow-hidden">
-        <motion.div style={{ y: heroY }} className="absolute inset-0 z-0">
-          <img src={joinBg} alt="" className="w-full h-full object-cover object-center scale-110" />
+      <section className="relative min-h-[65vh] flex items-end pb-16 pt-32 md:pb-20 md:pt-40 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img src={joinBg} alt="" className="w-full h-full object-cover object-center hero-bg-zoom" />
           <div className="absolute inset-0 bg-[#0A0F1E]/82" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0A0F1E]/50 to-[#0A0F1E]" />
-        </motion.div>
+        </div>
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.06]"
           style={{ backgroundImage: `linear-gradient(rgba(37,99,235,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.5) 1px, transparent 1px)`, backgroundSize: "64px 64px" }}
         />
