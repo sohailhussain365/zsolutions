@@ -14,15 +14,15 @@ import aboutTechBg from "@/assets/about-tech.png";
 
 /* ── Variants ──────────────────────────────────────────── */
 const fadeUp = {
-  hidden:  { opacity: 0, y: 56 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22,1,0.36,1] as [number, number, number, number] } },
+  hidden:  { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } },
 };
 const stagger = {
   hidden:  { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.13 } },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
 };
-const fadeLeft  = { hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
-const fadeRight = { hidden: { opacity: 0, x:  50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
+const fadeLeft  = { hidden: { opacity: 0, x: -24 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
+const fadeRight = { hidden: { opacity: 0, x: 24 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
 
 /* Word-reveal split animation */
 function WordReveal({ text, className = "" }: { text: string; className?: string }) {
@@ -38,7 +38,7 @@ function WordReveal({ text, className = "" }: { text: string; className?: string
         <motion.span
           key={i}
           className="inline-block mr-[0.25em]"
-          variants={{ hidden: { opacity: 0, y: 40, filter: "blur(6px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.6, ease: [0.22,1,0.36,1] as [number, number, number, number] } } }}
+          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22,1,0.36,1] as [number, number, number, number] } } }}
         >
           {w}
         </motion.span>
@@ -109,7 +109,7 @@ export default function HomePage() {
 
               {/* Sub */}
               <motion.p
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="text-lg md:text-xl text-slate-400 mb-12 max-w-xl leading-relaxed"
@@ -165,9 +165,9 @@ export default function HomePage() {
 
             {/* ── Right: floating stat cards ── */}
             <motion.div
-              initial={{ opacity: 0, x: 60 }}
+              initial={{ opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9, delay: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] }}
+              transition={{ duration: 0.6, delay: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] }}
               className="hidden lg:flex lg:col-span-5 flex-col gap-4"
             >
               {[
