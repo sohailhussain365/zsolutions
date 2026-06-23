@@ -97,7 +97,7 @@ export default function HomePage() {
               </motion.div>
 
               {/* Headline with word reveal */}
-              <h1 className="font-extrabold tracking-tight text-white leading-[1.03] mb-8" style={{ fontSize: "clamp(2.8rem, 6vw, 5.5rem)" }}>
+              <h1 className="font-extrabold tracking-tight text-white leading-[1.03] mb-8" style={{ fontSize: "clamp(2rem, 6vw, 5.5rem)" }}>
                 <WordReveal text="Connecting" />
                 <br />
                 <WordReveal text="Customers With" />
@@ -267,11 +267,11 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════════
           CONNECTED LIFECYCLE
       ══════════════════════════════════════════════════════════ */}
-      <section className="py-32 bg-[#0D1424] relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-[#0D1424] relative overflow-hidden">
         <FloatingOrbs />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
         <div className="container mx-auto px-6 lg:px-16 relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-4xl mx-auto text-center mb-24">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-4xl mx-auto text-center mb-12 md:mb-24">
             <span className="section-label">End-to-End Service</span>
             <h2 className="font-extrabold text-white leading-tight mb-6" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
               A Connected Lifecycle Empowering the<br />
@@ -308,7 +308,7 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════════
           WHY CHOOSE US
       ══════════════════════════════════════════════════════════ */}
-      <section className="py-32 bg-[#0A0F1E] relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-[#0A0F1E] relative overflow-hidden">
         <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-16 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -356,11 +356,11 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════════
           MISSION — Bold two-column split
       ══════════════════════════════════════════════════════════ */}
-      <section className="py-32 bg-[#0D1424] relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-[#0D1424] relative overflow-hidden">
         <FloatingOrbs />
         <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
         <div className="container mx-auto px-6 lg:px-16 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
             {/* Image */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeLeft} className="relative order-2 lg:order-1">
@@ -436,10 +436,10 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════════
           SERVICES / WHO WE ARE
       ══════════════════════════════════════════════════════════ */}
-      <section className="py-32 bg-[#0A0F1E] relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-[#0A0F1E] relative overflow-hidden">
         <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-16 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeLeft}>
               <span className="section-label">Simple. Reliable. Connected.</span>
               <h2 className="font-extrabold text-white leading-tight mb-8" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>
@@ -505,14 +505,14 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════════
           CAREERS CTA
       ══════════════════════════════════════════════════════════ */}
-      <section className="py-32 bg-[#0D1424] relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-[#0D1424] relative overflow-hidden">
         <FloatingOrbs />
         <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
         <div className="container mx-auto px-6 lg:px-16 relative z-10">
           <div className="max-w-5xl mx-auto">
             <motion.div
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-              className="rounded-3xl border border-blue-500/20 bg-gradient-to-br from-blue-600/12 via-blue-900/6 to-transparent p-12 md:p-20 relative overflow-hidden"
+              className="rounded-3xl border border-blue-500/20 bg-gradient-to-br from-blue-600/12 via-blue-900/6 to-transparent p-8 md:p-12 lg:p-20 relative overflow-hidden"
             >
               {/* Animated border glow */}
               <div className="absolute inset-0 rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-700"
