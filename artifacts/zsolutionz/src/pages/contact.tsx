@@ -75,7 +75,7 @@ export default function ContactPage() {
       {/* ══════════════════════════════════════════════════════════
           HERO
       ══════════════════════════════════════════════════════════ */}
-      <section className="relative min-h-[60vh] flex items-end pb-20 pt-40 overflow-hidden">
+      <section className="relative min-h-[60vh] flex items-end pb-16 pt-32 md:pb-20 md:pt-40 overflow-hidden">
         <div className="absolute inset-0 z-0 bg-[#0A0F1E]" />
         <div className="absolute inset-0 z-0 pointer-events-none opacity-70"
           style={{
@@ -107,7 +107,7 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
               <div>
                 <h1 className="font-extrabold text-white tracking-tight leading-[1.02] mb-6"
-                  style={{ fontSize: "clamp(3rem, 6vw, 5rem)" }}>
+                  style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>
                   Let's <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">Connect</span>
                 </h1>
                 <p className="text-xl text-slate-400 max-w-xl leading-relaxed">
@@ -166,13 +166,13 @@ export default function ContactPage() {
       {/* ══════════════════════════════════════════════════════════
           MAIN CONTACT LAYOUT
       ══════════════════════════════════════════════════════════ */}
-      <section className="py-32 bg-[#0A0F1E] relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-[#0A0F1E] relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-600/4 rounded-full blur-3xl" />
         </div>
         <div className="container mx-auto px-6 lg:px-16 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 max-w-7xl mx-auto">
 
             {/* ── LEFT COLUMN ────────────────────────── */}
             <motion.div
@@ -412,7 +412,7 @@ export default function ContactPage() {
       {/* ══════════════════════════════════════════════════════════
           BOTTOM TRUST STRIP
       ══════════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#0D1424] border-t border-white/[0.06]">
+      <section className="py-12 md:py-24 bg-[#0D1424] border-t border-white/[0.06]">
         <div className="container mx-auto px-6 lg:px-16">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
             className="grid grid-cols-1 md:grid-cols-3 gap-6"
