@@ -65,7 +65,6 @@ export default function JoinPage() {
               { icon: Laptop,     title: "Remote Flexibility",      desc: "Work from wherever you thrive. Our distributed team model gives you the freedom and flexibility to deliver your best work from anywhere." },
             ].map((benefit, i) => (
               <motion.div key={i} variants={fadeUp}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
                 className="glass-card rounded-3xl p-10 group hover:border-blue-500/35 hover:shadow-[0_0_50px_rgba(37,99,235,0.12)] transition-all duration-500 relative overflow-hidden glass-card-shimmer"
               >
                 <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/0 to-transparent group-hover:via-blue-500/60 transition-all duration-500" />
@@ -177,7 +176,6 @@ export default function JoinPage() {
               },
             ].map((job, i) => (
               <motion.div key={i} variants={fadeUp}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
                 className={`glass-card rounded-3xl p-8 flex flex-col group hover:border-blue-500/40 hover:shadow-[0_0_50px_rgba(37,99,235,0.15)] transition-all duration-500 relative overflow-hidden`}
               >
                 <div className={`absolute inset-0 bg-gradient-to-b ${job.color} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
@@ -245,7 +243,6 @@ export default function JoinPage() {
               { icon: CheckCircle,title: "Job Security",        desc: "Stable, growing company with strong values" },
             ].map((b, i) => (
               <motion.div key={i} variants={fadeUp}
-                whileHover={{ y: -5, scale: 1.02, transition: { duration: 0.25 } }}
                 className="glass-card rounded-2xl p-6 text-center group hover:border-blue-500/35 hover:shadow-[0_0_30px_rgba(37,99,235,0.1)] transition-all duration-300"
               >
                 <div className="h-12 w-12 mx-auto rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-500 mb-4 group-hover:bg-blue-600 group-hover:text-white group-hover:shadow-[0_0_14px_rgba(37,99,235,0.45)] transition-all duration-300">
