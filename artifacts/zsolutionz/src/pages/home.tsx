@@ -179,47 +179,45 @@ export default function HomePage() {
           HERO
       ══════════════════════════════════════════════════════════ */}
       <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-[#060B14]">
-        {/* Hero background — CSS gradient, zero image overhead */}
+
+        {/* ─── Background ─────────────────────────────────── */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          {/* Primary blue glow — top-right */}
+          {/* Blue glow right */}
           <div className="absolute inset-0" style={{
-            background: "radial-gradient(ellipse 70% 65% at 82% 28%, rgba(37,99,235,0.22) 0%, rgba(37,99,235,0.05) 45%, transparent 65%)"
+            background: "radial-gradient(ellipse 65% 60% at 85% 30%, rgba(37,99,235,0.22) 0%, rgba(37,99,235,0.04) 50%, transparent 70%)"
           }} />
-          {/* Secondary indigo glow — bottom-left */}
+          {/* Indigo glow left */}
           <div className="absolute inset-0" style={{
-            background: "radial-gradient(ellipse 55% 45% at 8% 92%, rgba(79,70,229,0.12) 0%, transparent 55%)"
+            background: "radial-gradient(ellipse 50% 40% at 5% 90%, rgba(79,70,229,0.13) 0%, transparent 60%)"
           }} />
-          {/* Base dark */}
-          <div className="absolute inset-0 bg-[#060B14]" style={{ zIndex: -1 }} />
-          {/* Subtle dot grid */}
-          <div className="absolute inset-0 opacity-40" style={{
-            backgroundImage: "radial-gradient(circle, rgba(37,99,235,0.18) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
+          {/* Dot grid */}
+          <div className="absolute inset-0" style={{
+            backgroundImage: "radial-gradient(circle, rgba(37,99,235,0.14) 1px, transparent 1px)",
+            backgroundSize: "44px 44px",
           }} />
-          {/* Vertical accent line */}
-          <div className="absolute top-0 bottom-0 right-[38%] w-px bg-gradient-to-b from-transparent via-blue-500/15 to-transparent hidden lg:block" />
           {/* Bottom fade */}
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#060B14] to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#060B14] to-transparent" />
         </div>
 
-        <div className="container relative z-10 mx-auto px-6 lg:px-16 pt-36 pb-28">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
+        {/* ─── Content ─────────────────────────────────────── */}
+        <div className="container relative z-10 mx-auto px-6 lg:px-16 pt-32 pb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12 items-center">
 
-            {/* ── Left copy ── */}
-            <div className="lg:col-span-7">
-              {/* Badge */}
+            {/* LEFT ─ copy */}
+            <div>
+              {/* Status badge */}
               <div
-                className="inline-flex items-center gap-3 rounded-full border border-blue-500/25 bg-blue-500/8 px-5 py-2.5 text-sm font-medium text-blue-300 mb-10 backdrop-blur-sm"
-                style={{ animation: "fadeSlideUp 0.5s ease 0.1s both" }}
+                className="inline-flex items-center gap-2.5 rounded-full border border-blue-500/20 bg-blue-500/[0.07] px-4 py-2 text-sm font-medium text-blue-300 mb-8"
+                style={{ animation: "fadeSlideUp 0.5s ease 0.05s both" }}
               >
-                <span className="h-2 w-2 rounded-full bg-blue-400" style={{ animation: "glowPulse 2s ease-in-out infinite" }} />
+                <span className="h-1.5 w-1.5 rounded-full bg-blue-400 shrink-0" style={{ animation: "glowPulse 2s ease-in-out infinite" }} />
                 A Connected Lifecycle · 10+ Years of Experience
               </div>
 
               {/* Headline */}
               <h1
-                className="font-extrabold tracking-tight text-white leading-[1.03] mb-8"
-                style={{ fontSize: "clamp(2rem, 6vw, 5.5rem)", animation: "fadeSlideUp 0.65s ease 0.25s both" }}
+                className="font-extrabold tracking-tight text-white leading-[1.05] mb-6"
+                style={{ fontSize: "clamp(2.4rem, 5.5vw, 5.2rem)", animation: "fadeSlideUp 0.6s ease 0.2s both" }}
               >
                 Connecting<br />
                 Customers With<br />
@@ -228,128 +226,146 @@ export default function HomePage() {
 
               {/* Sub */}
               <p
-                className="text-lg md:text-xl text-slate-400 mb-12 max-w-xl leading-relaxed"
-                style={{ animation: "fadeSlideUp 0.6s ease 0.55s both" }}
+                className="text-lg text-slate-400 mb-10 max-w-lg leading-relaxed"
+                style={{ animation: "fadeSlideUp 0.55s ease 0.45s both" }}
               >
-                ZSolutionz helps customers find reliable home internet and connectivity solutions with a simple, hassle-free process. Professional service. Dedicated support. Real results.
+                ZSolutionz helps customers find reliable home internet and connectivity
+                solutions — professional service, dedicated support, real results.
               </p>
 
               {/* CTAs */}
               <div
-                className="flex flex-col sm:flex-row gap-4"
-                style={{ animation: "fadeSlideUp 0.5s ease 0.7s both" }}
+                className="flex flex-col sm:flex-row gap-3 mb-10"
+                style={{ animation: "fadeSlideUp 0.5s ease 0.6s both" }}
               >
                 <Link href="/contact"
-                  className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-blue-600 text-white font-semibold text-base h-14 px-10 btn-glow shadow-[0_0_40px_rgba(37,99,235,0.45)]"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 text-white font-semibold text-sm h-12 px-8 shadow-[0_0_32px_rgba(37,99,235,0.45)] hover:bg-blue-500 hover:shadow-[0_0_40px_rgba(37,99,235,0.6)] transition-all duration-300"
                 >
                   Get In Touch
-                  <ArrowRight size={17} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+                  <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
                 <Link href="/join"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 text-white font-semibold text-base h-14 px-10 transition-all duration-300 hover:bg-white/8 hover:border-white/30 backdrop-blur-sm"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.12] text-white font-semibold text-sm h-12 px-8 hover:bg-white/[0.06] hover:border-white/25 transition-all duration-300"
                 >
                   Join Our Team
                 </Link>
               </div>
 
-              {/* Trust badges */}
+              {/* Trust row */}
               <div
-                className="flex flex-wrap gap-4 mt-10"
-                style={{ animation: "fadeSlideUp 0.5s ease 0.95s both" }}
+                className="flex flex-wrap gap-3"
+                style={{ animation: "fadeSlideUp 0.5s ease 0.78s both" }}
               >
                 {[
-                  { icon: Shield, label: "Trusted Service" },
-                  { icon: Award,  label: "10+ Years Experience" },
-                  { icon: Users,  label: "500+ Happy Customers" },
+                  { icon: Shield,     label: "Trusted Service"       },
+                  { icon: Award,      label: "10+ Years Experience"   },
+                  { icon: Users,      label: "500+ Happy Customers"   },
                 ].map((b, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] backdrop-blur-sm px-4 py-2"
-                  >
-                    <b.icon size={13} className="text-blue-400" strokeWidth={1.5} />
+                  <div key={i} className="flex items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.025] px-3.5 py-1.5">
+                    <b.icon size={12} className="text-blue-400" strokeWidth={1.5} />
                     <span className="text-slate-400 text-xs font-medium">{b.label}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* ── Right: premium dashboard card ── */}
+            {/* RIGHT ─ orbital visualization */}
             <div
-              className="hidden lg:flex lg:col-span-5 items-center"
-              style={{ animation: "fadeSlideUp 0.65s ease 0.55s both" }}
+              className="hidden lg:flex items-center justify-center"
+              style={{ animation: "fadeSlideUp 0.7s ease 0.4s both" }}
             >
-              <div className="w-full rounded-2xl overflow-hidden border border-white/[0.09]" style={{
-                background: "linear-gradient(160deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.015) 100%)",
-                backdropFilter: "blur(16px)",
-                boxShadow: "0 0 0 1px rgba(37,99,235,0.08), 0 32px 64px -16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)"
-              }}>
+              <div className="relative" style={{ width: 380, height: 380 }}>
 
-                {/* Card header */}
-                <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.07]">
-                  <div className="flex items-center gap-2.5">
-                    <div className="h-7 w-7 rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-[0_0_12px_rgba(37,99,235,0.5)]">
-                      <span className="text-white font-black text-xs leading-none">Z</span>
-                    </div>
-                    <span className="text-white font-bold text-sm tracking-tight">ZSolutionz</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-green-400" style={{ animation: "glowPulse 2s ease-in-out infinite" }} />
-                    <span className="text-green-400 text-[11px] font-semibold">Active</span>
+                {/* Concentric rings */}
+                <div className="absolute inset-0 rounded-full border border-white/[0.05]" />
+                <div className="absolute rounded-full border border-blue-500/[0.09]" style={{ inset: 32 }} />
+                <div className="absolute rounded-full border border-blue-500/[0.14]" style={{ inset: 64 }} />
+                <div className="absolute rounded-full border border-blue-500/[0.2]"  style={{ inset: 96 }} />
+
+                {/* Inner glow */}
+                <div className="absolute rounded-full" style={{
+                  inset: 96,
+                  background: "radial-gradient(circle, rgba(37,99,235,0.18) 0%, transparent 70%)"
+                }} />
+
+                {/* Center icon */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div
+                    className="flex items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700"
+                    style={{
+                      width: 72, height: 72,
+                      boxShadow: "0 0 0 12px rgba(37,99,235,0.08), 0 0 60px rgba(37,99,235,0.38)"
+                    }}
+                  >
+                    <Globe size={30} className="text-white" strokeWidth={1.5} />
                   </div>
                 </div>
 
-                {/* 2×2 stats grid */}
-                <div className="grid grid-cols-2">
-                  {[
-                    { icon: Award,      value: "10+",  label: "Years of",  sub: "Experience" },
-                    { icon: Users,      value: "500+", label: "Happy",     sub: "Customers"  },
-                    { icon: Headphones, value: "24/7", label: "Support",   sub: "Available"  },
-                    { icon: Shield,     value: "100%", label: "Client",    sub: "Commitment" },
-                  ].map((s, i) => (
-                    <div
-                      key={i}
-                      className={`p-6 group hover:bg-white/[0.025] transition-colors duration-300
-                        ${i % 2 === 0 ? "border-r border-white/[0.07]" : ""}
-                        ${i < 2 ? "border-b border-white/[0.07]" : ""}
-                      `}
-                    >
-                      <div className="h-8 w-8 rounded-lg bg-blue-600/10 flex items-center justify-center text-blue-400 mb-3 group-hover:bg-blue-600/20 transition-colors duration-300">
-                        <s.icon size={16} strokeWidth={1.5} />
-                      </div>
-                      <div className="text-2xl font-extrabold text-white leading-none mb-1.5">{s.value}</div>
-                      <div className="text-[11px] text-slate-500 leading-snug font-medium">{s.label}<br />{s.sub}</div>
-                    </div>
-                  ))}
+                {/* Dashed connector lines (SVG) */}
+                <svg className="absolute inset-0" width="380" height="380" viewBox="0 0 380 380" fill="none">
+                  <line x1="190" y1="12"  x2="190" y2="86"  stroke="rgba(37,99,235,0.28)" strokeDasharray="3 4" strokeLinecap="round" />
+                  <line x1="368" y1="190" x2="294" y2="190" stroke="rgba(37,99,235,0.28)" strokeDasharray="3 4" strokeLinecap="round" />
+                  <line x1="190" y1="368" x2="190" y2="294" stroke="rgba(37,99,235,0.28)" strokeDasharray="3 4" strokeLinecap="round" />
+                  <line x1="12"  y1="190" x2="86"  y2="190" stroke="rgba(37,99,235,0.28)" strokeDasharray="3 4" strokeLinecap="round" />
+                </svg>
+
+                {/* Glowing ring dots */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1 w-2 h-2 rounded-full bg-blue-400"
+                  style={{ boxShadow: "0 0 10px 2px rgba(96,165,250,0.85)" }} />
+                <div className="absolute right-0 top-1/2 translate-x-1 -translate-y-1/2 w-2 h-2 rounded-full bg-blue-500"
+                  style={{ boxShadow: "0 0 10px 2px rgba(37,99,235,0.85)" }} />
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1 w-2 h-2 rounded-full bg-indigo-400"
+                  style={{ boxShadow: "0 0 10px 2px rgba(129,140,248,0.85)" }} />
+                <div className="absolute left-0 top-1/2 -translate-x-1 -translate-y-1/2 w-2 h-2 rounded-full bg-cyan-400"
+                  style={{ boxShadow: "0 0 10px 2px rgba(34,211,238,0.85)" }} />
+
+                {/* Stat badges — cardinal positions */}
+                {/* TOP */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full -mt-3 flex items-center gap-2 rounded-full border border-blue-500/20 px-4 py-2 whitespace-nowrap"
+                  style={{ background: "#060B14", boxShadow: "0 4px 24px rgba(0,0,0,0.5)" }}>
+                  <Award size={12} className="text-blue-400" strokeWidth={1.5} />
+                  <span className="text-white text-[13px] font-extrabold">10+</span>
+                  <span className="text-slate-500 text-[11px]">Yrs Experience</span>
                 </div>
 
-                {/* Card footer */}
-                <div className="px-6 py-3.5 border-t border-white/[0.07] flex items-center gap-0">
-                  {["Trusted", "Reliable", "Connected"].map((tag, i) => (
-                    <React.Fragment key={i}>
-                      {i > 0 && <span className="mx-3 text-blue-800 text-xs">·</span>}
-                      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600">{tag}</span>
-                    </React.Fragment>
-                  ))}
+                {/* RIGHT */}
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full ml-3 flex items-center gap-2 rounded-full border border-blue-500/20 px-4 py-2 whitespace-nowrap"
+                  style={{ background: "#060B14", boxShadow: "0 4px 24px rgba(0,0,0,0.5)", marginLeft: 12 }}>
+                  <Users size={12} className="text-blue-400" strokeWidth={1.5} />
+                  <span className="text-white text-[13px] font-extrabold">500+</span>
+                  <span className="text-slate-500 text-[11px]">Clients</span>
+                </div>
+
+                {/* BOTTOM */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full mt-3 flex items-center gap-2 rounded-full border border-blue-500/20 px-4 py-2 whitespace-nowrap"
+                  style={{ background: "#060B14", boxShadow: "0 4px 24px rgba(0,0,0,0.5)", marginTop: 12 }}>
+                  <Headphones size={12} className="text-blue-400" strokeWidth={1.5} />
+                  <span className="text-white text-[13px] font-extrabold">24/7</span>
+                  <span className="text-slate-500 text-[11px]">Support</span>
+                </div>
+
+                {/* LEFT */}
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full flex items-center gap-2 rounded-full border border-blue-500/20 px-4 py-2 whitespace-nowrap"
+                  style={{ background: "#060B14", boxShadow: "0 4px 24px rgba(0,0,0,0.5)", marginRight: 12 }}>
+                  <Shield size={12} className="text-blue-400" strokeWidth={1.5} />
+                  <span className="text-white text-[13px] font-extrabold">100%</span>
+                  <span className="text-slate-500 text-[11px]">Reliable</span>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
 
         {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-default"
-        >
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
           <span className="text-[10px] text-slate-600 uppercase tracking-[0.25em]">Scroll</span>
           <motion.div
-            animate={{ scaleY: [1, 0.4, 1] }}
-            transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-            className="h-8 w-px bg-gradient-to-b from-blue-500/70 to-transparent origin-top"
+            animate={{ scaleY: [1, 0.35, 1] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            className="h-7 w-px bg-gradient-to-b from-blue-500/60 to-transparent origin-top"
           />
-        </motion.div>
+        </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════
