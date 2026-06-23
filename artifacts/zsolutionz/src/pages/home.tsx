@@ -1,3 +1,4 @@
+import * as React from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import {
@@ -46,6 +47,153 @@ function WordReveal({ text, className = "" }: { text: string; className?: string
   );
 }
 
+
+/* ─── Lightweight service slider (CSS-only transitions, no images) ─── */
+const SLIDES = [
+  {
+    Icon: Headphones,
+    num: "01",
+    label: "Service & Support",
+    headline: "Exceptional Customer Care, Every Time",
+    body: "Our dedicated support team responds fast and resolves every issue with professionalism and genuine care — building loyalty that lasts beyond the first interaction.",
+    accent: "from-blue-600 to-blue-800",
+    glow: "rgba(37,99,235,0.18)",
+  },
+  {
+    Icon: Globe,
+    num: "02",
+    label: "Digital Customer Acquisition",
+    headline: "Connect the Right Customers to the Right Solutions",
+    body: "Strategic outreach and targeted digital campaigns that grow your customer base with precision — reaching people who are ready to connect today.",
+    accent: "from-indigo-600 to-indigo-800",
+    glow: "rgba(79,70,229,0.18)",
+  },
+  {
+    Icon: BarChart3,
+    num: "03",
+    label: "Surveys & Feedback Analytics",
+    headline: "Real Insights That Drive Real Business Results",
+    body: "We collect, analyze, and act on genuine customer feedback to continuously improve experiences, strengthen your brand, and deliver measurable growth.",
+    accent: "from-cyan-600 to-cyan-800",
+    glow: "rgba(8,145,178,0.18)",
+  },
+] as const;
+
+function ServiceSlider() {
+  const [active, setActive] = React.useState(0);
+  const [paused, setPaused] = React.useState(false);
+
+  React.useEffect(() => {
+    if (paused) return;
+    const t = setInterval(() => setActive(a => (a + 1) % SLIDES.length), 5000);
+    return () => clearInterval(t);
+  }, [paused]);
+
+  const slide = SLIDES[active];
+
+  return (
+    <section className="py-16 md:py-24 bg-[#060B14] relative overflow-hidden">
+      {/* subtle top/bottom divider lines */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+
+      <div className="container mx-auto px-6 lg:px-16">
+        {/* Label */}
+        <div className="text-center mb-10">
+          <span className="section-label">What We Do</span>
+        </div>
+
+        {/* Slider card */}
+        <div
+          className="relative rounded-3xl border border-white/[0.07] overflow-hidden cursor-default select-none"
+          style={{ background: "linear-gradient(135deg,#0D1424 0%,#0A0F1E 100%)" }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          {/* Ambient glow that changes per slide */}
+          <div
+            className="absolute inset-0 pointer-events-none transition-all duration-700"
+            style={{ background: `radial-gradient(ellipse 60% 60% at 70% 50%, ${slide.glow}, transparent)` }}
+          />
+
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-0 min-h-[320px]">
+
+            {/* Left: slide tabs */}
+            <div className="lg:col-span-4 border-b lg:border-b-0 lg:border-r border-white/[0.06] flex lg:flex-col">
+              {SLIDES.map((s, i) => (
+                <button
+                  key={i}
+                  onClick={() => { setActive(i); setPaused(true); }}
+                  className={`flex-1 lg:flex-none flex items-center gap-4 px-6 py-5 lg:py-7 text-left transition-all duration-300 relative ${
+                    active === i
+                      ? "bg-white/[0.04] text-white"
+                      : "text-slate-600 hover:text-slate-400 hover:bg-white/[0.02]"
+                  }`}
+                >
+                  {/* Active indicator bar */}
+                  {active === i && (
+                    <span className="absolute left-0 top-3 bottom-3 w-[3px] rounded-r-full bg-gradient-to-b from-blue-400 to-blue-600" />
+                  )}
+                  <span className={`text-[10px] font-black tracking-[0.2em] transition-colors duration-300 ${active === i ? "text-blue-500" : ""}`}>
+                    {s.num}
+                  </span>
+                  <span className="text-sm font-semibold leading-tight hidden sm:block lg:block">
+                    {s.label}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Right: slide content */}
+            <div className="lg:col-span-8 p-8 md:p-10 lg:p-14 flex flex-col justify-center">
+              <div
+                key={active}
+                style={{ animation: "fadeSlideUp 0.45s ease forwards" }}
+              >
+                {/* Icon */}
+                <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${slide.accent} flex items-center justify-center text-white mb-8 shadow-[0_8px_24px_rgba(37,99,235,0.25)]`}>
+                  <slide.Icon size={26} strokeWidth={1.5} />
+                </div>
+
+                <h3
+                  className="font-extrabold text-white leading-tight mb-5"
+                  style={{ fontSize: "clamp(1.4rem, 3vw, 2.1rem)" }}
+                >
+                  {slide.headline}
+                </h3>
+                <p className="text-slate-400 leading-relaxed text-base max-w-xl">
+                  {slide.body}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Dots + progress bar */}
+          <div className="relative z-10 flex items-center justify-between px-8 md:px-14 py-5 border-t border-white/[0.05]">
+            <div className="flex items-center gap-2.5">
+              {SLIDES.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => { setActive(i); setPaused(true); }}
+                  className={`rounded-full transition-all duration-300 ${
+                    active === i
+                      ? "w-6 h-1.5 bg-blue-500"
+                      : "w-1.5 h-1.5 bg-white/20 hover:bg-white/40"
+                  }`}
+                  aria-label={`Slide ${i + 1}`}
+                />
+              ))}
+            </div>
+            <span className="text-[10px] text-slate-600 font-semibold tracking-widest uppercase">
+              {String(active + 1).padStart(2,"0")} / {String(SLIDES.length).padStart(2,"0")}
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function HomePage() {
 
   return (
@@ -57,7 +205,7 @@ export default function HomePage() {
       <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
         {/* Parallax bg */}
         <div className="absolute inset-0 z-0">
-          <img src={heroBg} alt="" className="w-full h-full object-cover object-center hero-bg-zoom" />
+          <img src={heroBg} alt="" className="w-full h-full object-cover object-center hero-bg-zoom" fetchPriority="high" decoding="async" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0A0F1E]/97 via-[#0A0F1E]/82 to-[#0A0F1E]/40" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] via-transparent to-[#0A0F1E]/30" />
         </div>
@@ -259,6 +407,8 @@ export default function HomePage() {
         </motion.div>
       </section>
 
+      <ServiceSlider />
+
       {/* ══════════════════════════════════════════════════════════
           CONNECTED LIFECYCLE
       ══════════════════════════════════════════════════════════ */}
@@ -284,16 +434,20 @@ export default function HomePage() {
               { icon: BarChart3,  num: "03", title: "Surveys & Feedback Analytics",    desc: "Real insights from real customers. We gather, analyze, and act on feedback to continuously improve the experience and drive business results." },
             ].map((item, i) => (
               <motion.div key={i} variants={fadeUp}
-                whileHover={{ y: -6, transition: { duration: 0.3 } }}
-                className="relative rounded-3xl bg-gradient-to-br from-blue-600/8 to-transparent border border-white/[0.07] p-10 group hover:border-blue-500/35 hover:shadow-[0_0_50px_rgba(37,99,235,0.12)] transition-all duration-500 overflow-hidden glass-card-shimmer"
+                className="relative rounded-3xl bg-gradient-to-br from-blue-600/8 to-transparent border border-white/[0.07] p-10 group hover:border-blue-500/35 hover:shadow-[0_0_40px_rgba(37,99,235,0.14)] transition-all duration-300 overflow-hidden glass-card-shimmer hover:-translate-y-1.5"
               >
                 <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/0 to-transparent group-hover:via-blue-500/60 transition-all duration-500" />
-                <div className="text-xs font-black text-blue-500/15 tracking-[0.3em] mb-8">{item.num}</div>
+                <div className="absolute top-6 right-8 text-7xl font-black text-white/[0.03] group-hover:text-white/[0.05] transition-all duration-500 leading-none select-none pointer-events-none">{item.num}</div>
+                <div className="text-[10px] font-black text-blue-500/40 tracking-[0.3em] mb-8 group-hover:text-blue-400/60 transition-colors duration-300">{item.num}</div>
                 <div className="h-16 w-16 rounded-2xl bg-blue-600/10 flex items-center justify-center text-blue-400 mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(37,99,235,0.4)]">
                   <item.icon size={30} strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl font-extrabold text-white mb-4">{item.title}</h3>
                 <p className="text-slate-400 leading-relaxed text-sm">{item.desc}</p>
+                <div className="mt-6 flex items-center gap-1.5 text-blue-500/0 group-hover:text-blue-400 transition-all duration-300 text-xs font-semibold">
+                  <span>Learn more</span>
+                  <ChevronRight size={12} className="group-hover:translate-x-0.5 transition-transform duration-300" />
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -477,7 +631,7 @@ export default function HomePage() {
               transition={{ duration: 0.4 }}
               className="relative rounded-3xl overflow-hidden aspect-[4/3]"
             >
-              <img src={aboutTechBg} alt="Technology" className="w-full h-full object-cover" />
+              <img src={aboutTechBg} alt="Technology" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/50 to-transparent mix-blend-multiply" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E]/60 to-transparent" />
               <motion.div
