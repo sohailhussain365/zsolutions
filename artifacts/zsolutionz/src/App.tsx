@@ -15,9 +15,9 @@ import ContactPage from "@/pages/contact";
 const queryClient = new QueryClient();
 
 const pageVariants = {
-  initial: { opacity: 0, y: 20, filter: "blur(4px)" },
-  enter:   { opacity: 1, y: 0,  filter: "blur(0px)", transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
-  exit:    { opacity: 0, y: -10, filter: "blur(2px)", transition: { duration: 0.25, ease: [0.55, 0, 1, 0.45] as [number, number, number, number] } },
+  initial: { opacity: 0, y: 14, },
+  enter:   { opacity: 1, y: 0,  transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+  exit:    { opacity: 0, y: -8, transition: { duration: 0.2, ease: [0.55, 0, 1, 0.45] as [number, number, number, number] } },
 };
 
 function PageWrapper({ children }: { children: React.ReactNode }) {
