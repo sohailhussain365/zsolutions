@@ -1,6 +1,5 @@
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { useRef } from "react";
 import {
   Headphones, Globe, BarChart3, Shield, Users, Clock, Heart,
   ArrowRight, CheckCircle, Phone, Mail, ChevronRight,
@@ -48,10 +47,6 @@ function WordReveal({ text, className = "" }: { text: string; className?: string
 }
 
 export default function HomePage() {
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const rawY  = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const heroY = useSpring(rawY, { stiffness: 80, damping: 20 });
 
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
@@ -59,13 +54,13 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════════
           HERO
       ══════════════════════════════════════════════════════════ */}
-      <section ref={heroRef} id="home" className="relative min-h-screen flex items-center overflow-hidden">
+      <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
         {/* Parallax bg */}
-        <motion.div style={{ y: heroY }} className="absolute inset-0 z-0">
-          <img src={heroBg} alt="" className="w-full h-full object-cover object-center scale-110" />
+        <div className="absolute inset-0 z-0">
+          <img src={heroBg} alt="" className="w-full h-full object-cover object-center hero-bg-zoom" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0A0F1E]/97 via-[#0A0F1E]/82 to-[#0A0F1E]/40" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] via-transparent to-[#0A0F1E]/30" />
-        </motion.div>
+        </div>
 
         {/* Animated grid */}
         <div className="absolute inset-0 z-0 pointer-events-none"
