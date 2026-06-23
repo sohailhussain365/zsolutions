@@ -179,16 +179,27 @@ export default function HomePage() {
           HERO
       ══════════════════════════════════════════════════════════ */}
       <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-[#060B14]">
-        {/* CSS gradient hero — zero image download, zero extra animations */}
+        {/* Hero background — CSS gradient, zero image overhead */}
         <div className="absolute inset-0 z-0 pointer-events-none">
+          {/* Primary blue glow — top-right */}
           <div className="absolute inset-0" style={{
-            background: "radial-gradient(ellipse 80% 70% at 72% 38%, rgba(37,99,235,0.15) 0%, transparent 58%), radial-gradient(ellipse 50% 50% at 15% 85%, rgba(79,70,229,0.08) 0%, transparent 55%), #060B14"
+            background: "radial-gradient(ellipse 70% 65% at 82% 28%, rgba(37,99,235,0.22) 0%, rgba(37,99,235,0.05) 45%, transparent 65%)"
           }} />
-          <div className="absolute inset-0 opacity-60" style={{
-            backgroundImage: "linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
+          {/* Secondary indigo glow — bottom-left */}
+          <div className="absolute inset-0" style={{
+            background: "radial-gradient(ellipse 55% 45% at 8% 92%, rgba(79,70,229,0.12) 0%, transparent 55%)"
           }} />
-          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#060B14] to-transparent" />
+          {/* Base dark */}
+          <div className="absolute inset-0 bg-[#060B14]" style={{ zIndex: -1 }} />
+          {/* Subtle dot grid */}
+          <div className="absolute inset-0 opacity-40" style={{
+            backgroundImage: "radial-gradient(circle, rgba(37,99,235,0.18) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }} />
+          {/* Vertical accent line */}
+          <div className="absolute top-0 bottom-0 right-[38%] w-px bg-gradient-to-b from-transparent via-blue-500/15 to-transparent hidden lg:block" />
+          {/* Bottom fade */}
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#060B14] to-transparent" />
         </div>
 
         <div className="container relative z-10 mx-auto px-6 lg:px-16 pt-36 pb-28">
@@ -262,35 +273,66 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* ── Right: floating stat cards ── */}
-            <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] }}
-              className="hidden lg:flex lg:col-span-5 flex-col gap-4"
+            {/* ── Right: premium dashboard card ── */}
+            <div
+              className="hidden lg:flex lg:col-span-5 items-center"
+              style={{ animation: "fadeSlideUp 0.65s ease 0.55s both" }}
             >
-              {[
-                { num: 10, suffix: "+", label: "Years of Experience", sub: "Industry expertise", icon: Award,     delay: 0.1 },
-                { num: 500, suffix: "+", label: "Happy Customers",     sub: "Served nationwide",   icon: Users,     delay: 0.2 },
-                { num: 24, suffix: "/7", label: "Support Available",   sub: "Always here for you", icon: Headphones,delay: 0.3 },
-              ].map((s, i) => (
-                <div
-                key={i}
-                className="glass-card rounded-2xl p-6 flex items-center gap-5 cursor-default group"
-                >
-                  <div className="h-12 w-12 rounded-xl bg-blue-600/12 flex items-center justify-center text-blue-400 shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-                    <s.icon size={22} strokeWidth={1.5} />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-extrabold text-white leading-none">
-                      <AnimatedCounter target={s.num} suffix={s.suffix} duration={1600} />
+              <div className="w-full rounded-2xl overflow-hidden border border-white/[0.09]" style={{
+                background: "linear-gradient(160deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.015) 100%)",
+                backdropFilter: "blur(16px)",
+                boxShadow: "0 0 0 1px rgba(37,99,235,0.08), 0 32px 64px -16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)"
+              }}>
+
+                {/* Card header */}
+                <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.07]">
+                  <div className="flex items-center gap-2.5">
+                    <div className="h-7 w-7 rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-[0_0_12px_rgba(37,99,235,0.5)]">
+                      <span className="text-white font-black text-xs leading-none">Z</span>
                     </div>
-                    <div className="text-sm font-semibold text-slate-300 mt-0.5">{s.label}</div>
-                    <div className="text-xs text-slate-500 mt-0.5">{s.sub}</div>
+                    <span className="text-white font-bold text-sm tracking-tight">ZSolutionz</span>
                   </div>
-                </motion.div>
-              ))}
-            </motion.div>
+                  <div className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-green-400" style={{ animation: "glowPulse 2s ease-in-out infinite" }} />
+                    <span className="text-green-400 text-[11px] font-semibold">Active</span>
+                  </div>
+                </div>
+
+                {/* 2×2 stats grid */}
+                <div className="grid grid-cols-2">
+                  {[
+                    { icon: Award,      value: "10+",  label: "Years of",  sub: "Experience" },
+                    { icon: Users,      value: "500+", label: "Happy",     sub: "Customers"  },
+                    { icon: Headphones, value: "24/7", label: "Support",   sub: "Available"  },
+                    { icon: Shield,     value: "100%", label: "Client",    sub: "Commitment" },
+                  ].map((s, i) => (
+                    <div
+                      key={i}
+                      className={`p-6 group hover:bg-white/[0.025] transition-colors duration-300
+                        ${i % 2 === 0 ? "border-r border-white/[0.07]" : ""}
+                        ${i < 2 ? "border-b border-white/[0.07]" : ""}
+                      `}
+                    >
+                      <div className="h-8 w-8 rounded-lg bg-blue-600/10 flex items-center justify-center text-blue-400 mb-3 group-hover:bg-blue-600/20 transition-colors duration-300">
+                        <s.icon size={16} strokeWidth={1.5} />
+                      </div>
+                      <div className="text-2xl font-extrabold text-white leading-none mb-1.5">{s.value}</div>
+                      <div className="text-[11px] text-slate-500 leading-snug font-medium">{s.label}<br />{s.sub}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Card footer */}
+                <div className="px-6 py-3.5 border-t border-white/[0.07] flex items-center gap-0">
+                  {["Trusted", "Reliable", "Connected"].map((tag, i) => (
+                    <React.Fragment key={i}>
+                      {i > 0 && <span className="mx-3 text-blue-800 text-xs">·</span>}
+                      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600">{tag}</span>
+                    </React.Fragment>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
