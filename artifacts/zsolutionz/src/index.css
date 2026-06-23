@@ -72,7 +72,7 @@
 
 @layer base {
   * { @apply border-border; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: auto; }
   body { @apply font-sans antialiased bg-background text-foreground; }
 }
 
@@ -140,6 +140,11 @@
   20%  { opacity: 1; }
   80%  { opacity: 0.6; }
   100% { transform: translateY(-120px) translateX(30px); opacity: 0; }
+}
+
+@keyframes bgZoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.1); }
 }
 
 /* ─── Utilities ─────────────────────────────────────────── */
@@ -219,6 +224,13 @@
   }
   .btn-glow:active {
     transform: translateY(0);
+  }
+
+  /* Hero bg – smooth zoom instead of parallax */
+  .hero-bg-zoom {
+    animation: bgZoom 18s ease-in-out infinite alternate;
+    transform-origin: center center;
+    will-change: transform;
   }
 
   /* Float animations */
