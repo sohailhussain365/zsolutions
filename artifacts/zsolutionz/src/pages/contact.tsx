@@ -28,10 +28,10 @@ type FormValues = z.infer<typeof schema>;
 type Status = "idle" | "submitting" | "success" | "error";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 48 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22,1,0.36,1] as [number, number, number, number] } },
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } },
 };
-const stagger = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.12 } } };
+const stagger = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.07 } } };
 
 export default function ContactPage() {
   const [status, setStatus] = useState<Status>("idle");
@@ -91,7 +91,7 @@ export default function ContactPage() {
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#0A0F1E]/60 via-transparent to-[#0A0F1E]" />
 
         <div className="container relative z-10 mx-auto px-6 lg:px-16">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-sm font-medium text-slate-600 mb-8">
               <Link href="/" className="hover:text-slate-400 transition-colors">Home</Link>
@@ -176,8 +176,8 @@ export default function ContactPage() {
 
             {/* ── LEFT COLUMN ────────────────────────── */}
             <motion.div
-              initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
+              initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               className="lg:col-span-4 flex flex-col gap-5"
             >
               <div className="mb-4">
@@ -273,7 +273,7 @@ export default function ContactPage() {
             {/* ── RIGHT COLUMN: FORM ──────────────────── */}
             <motion.div
               initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
               className="lg:col-span-8"
             >
               {/* Form card */}
