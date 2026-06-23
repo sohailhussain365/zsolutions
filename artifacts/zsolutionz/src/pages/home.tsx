@@ -22,7 +22,218 @@ const stagger = {
 const fadeLeft  = { hidden: { opacity: 0, x: -24 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
 const fadeRight = { hidden: { opacity: 0, x: 24 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
 
+/* ─── Stat badge data ─────────────────────────────────── */
+const STAT_BADGES = [
+  { icon: Award,      value: "10+",  label: "Yrs Experience", position: "top"    },
+  { icon: Users,      value: "500+", label: "Clients",        position: "right"  },
+  { icon: Headphones, value: "24/7", label: "Support",        position: "bottom" },
+  { icon: Shield,     value: "100%", label: "Reliable",       position: "left"   },
+] as const;
 
+/* ─── Orbital Hero Visualization ─────────────────────── */
+function OrbitalViz() {
+  return (
+    <div className="relative flex items-center justify-center" style={{ width: 420, height: 420 }}>
+
+      {/* ── Ambient glow ── */}
+      <motion.div
+        animate={{ scale: [1, 1.18, 1], opacity: [0.5, 0.9, 0.5] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute rounded-full pointer-events-none"
+        style={{
+          inset: 80,
+          background: "radial-gradient(circle, rgba(37,99,235,0.22) 0%, rgba(37,99,235,0.06) 50%, transparent 70%)",
+        }}
+      />
+
+      {/* ── Outer ring (slow rotate) ── */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
+        className="absolute rounded-full"
+        style={{
+          inset: 10,
+          border: "1px solid rgba(255,255,255,0.05)",
+          borderTopColor: "rgba(37,99,235,0.25)",
+        }}
+      />
+
+      {/* ── Ring 2 (counter-rotate) ── */}
+      <motion.div
+        animate={{ rotate: -360 }}
+        transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+        className="absolute rounded-full"
+        style={{
+          inset: 42,
+          border: "1px dashed rgba(37,99,235,0.13)",
+          borderTopColor: "rgba(37,99,235,0.35)",
+        }}
+      />
+
+      {/* ── Ring 3 ── */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
+        className="absolute rounded-full"
+        style={{
+          inset: 74,
+          border: "1px solid rgba(37,99,235,0.18)",
+          borderRightColor: "rgba(96,165,250,0.45)",
+        }}
+      />
+
+      {/* ── Ring 4 (innermost) ── */}
+      <div
+        className="absolute rounded-full"
+        style={{
+          inset: 106,
+          border: "1px solid rgba(37,99,235,0.25)",
+        }}
+      />
+
+      {/* ── Dashed connector lines (SVG) ── */}
+      <svg
+        className="absolute inset-0 pointer-events-none"
+        width="420" height="420" viewBox="0 0 420 420" fill="none"
+      >
+        <line x1="210" y1="10"  x2="210" y2="106" stroke="rgba(37,99,235,0.3)"  strokeDasharray="3 4" strokeLinecap="round" />
+        <line x1="410" y1="210" x2="314" y2="210" stroke="rgba(37,99,235,0.3)"  strokeDasharray="3 4" strokeLinecap="round" />
+        <line x1="210" y1="410" x2="210" y2="314" stroke="rgba(37,99,235,0.3)"  strokeDasharray="3 4" strokeLinecap="round" />
+        <line x1="10"  y1="210" x2="106" y2="210" stroke="rgba(37,99,235,0.3)"  strokeDasharray="3 4" strokeLinecap="round" />
+      </svg>
+
+      {/* ── Orbiting dot on outer ring ── */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+        className="absolute pointer-events-none"
+        style={{ inset: 10 }}
+      >
+        <div
+          className="absolute rounded-full bg-blue-400"
+          style={{
+            width: 7, height: 7,
+            top: "50%", left: 0,
+            transform: "translateY(-50%) translateX(-50%)",
+            boxShadow: "0 0 10px 3px rgba(96,165,250,0.9)",
+          }}
+        />
+      </motion.div>
+
+      {/* ── Glowing ring cardinal dots ── */}
+      <motion.div
+        animate={{ opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[10px] left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-blue-400"
+        style={{ boxShadow: "0 0 10px 3px rgba(96,165,250,0.8)" }}
+      />
+      <motion.div
+        animate={{ opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        className="absolute right-[10px] top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-blue-500"
+        style={{ boxShadow: "0 0 10px 3px rgba(37,99,235,0.85)" }}
+      />
+      <motion.div
+        animate={{ opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1.0 }}
+        className="absolute bottom-[10px] left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-indigo-400"
+        style={{ boxShadow: "0 0 10px 3px rgba(129,140,248,0.85)" }}
+      />
+      <motion.div
+        animate={{ opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+        className="absolute left-[10px] top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-cyan-400"
+        style={{ boxShadow: "0 0 10px 3px rgba(34,211,238,0.85)" }}
+      />
+
+      {/* ── Center icon ── */}
+      <motion.div
+        animate={{ scale: [1, 1.07, 1], boxShadow: [
+          "0 0 0 12px rgba(37,99,235,0.06), 0 0 50px rgba(37,99,235,0.3)",
+          "0 0 0 18px rgba(37,99,235,0.1), 0 0 80px rgba(37,99,235,0.55)",
+          "0 0 0 12px rgba(37,99,235,0.06), 0 0 50px rgba(37,99,235,0.3)",
+        ]}}
+        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+        className="relative flex items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 z-10"
+        style={{ width: 72, height: 72 }}
+      >
+        <Globe size={30} className="text-white" strokeWidth={1.5} />
+      </motion.div>
+
+      {/* ── Stat Badges ── */}
+
+      {/* TOP */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.9, duration: 0.55, ease: [0.22,1,0.36,1] }}
+        className="absolute flex items-center gap-2 rounded-full border border-blue-500/20 px-4 py-2 whitespace-nowrap"
+        style={{
+          top: -10, left: "50%", transform: "translateX(-50%) translateY(-100%)",
+          background: "#060B14", boxShadow: "0 4px 24px rgba(0,0,0,0.55)",
+          animation: "floatY 5s ease-in-out 0.9s infinite",
+        }}
+      >
+        <Award size={12} className="text-blue-400 shrink-0" strokeWidth={1.5} />
+        <span className="text-white text-[13px] font-extrabold">10+</span>
+        <span className="text-slate-500 text-[11px]">Yrs Experience</span>
+      </motion.div>
+
+      {/* RIGHT */}
+      <motion.div
+        initial={{ opacity: 0, x: -12 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1.05, duration: 0.55, ease: [0.22,1,0.36,1] }}
+        className="absolute flex items-center gap-2 rounded-full border border-blue-500/20 px-4 py-2 whitespace-nowrap"
+        style={{
+          right: -12, top: "50%", transform: "translateX(100%) translateY(-50%)",
+          background: "#060B14", boxShadow: "0 4px 24px rgba(0,0,0,0.55)",
+          animation: "floatX 6s ease-in-out 1.05s infinite",
+        }}
+      >
+        <Users size={12} className="text-blue-400 shrink-0" strokeWidth={1.5} />
+        <span className="text-white text-[13px] font-extrabold">500+</span>
+        <span className="text-slate-500 text-[11px]">Clients</span>
+      </motion.div>
+
+      {/* BOTTOM */}
+      <motion.div
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2, duration: 0.55, ease: [0.22,1,0.36,1] }}
+        className="absolute flex items-center gap-2 rounded-full border border-blue-500/20 px-4 py-2 whitespace-nowrap"
+        style={{
+          bottom: -10, left: "50%", transform: "translateX(-50%) translateY(100%)",
+          background: "#060B14", boxShadow: "0 4px 24px rgba(0,0,0,0.55)",
+          animation: "floatY 5.5s ease-in-out 1.2s infinite",
+          animationDirection: "reverse",
+        }}
+      >
+        <Headphones size={12} className="text-blue-400 shrink-0" strokeWidth={1.5} />
+        <span className="text-white text-[13px] font-extrabold">24/7</span>
+        <span className="text-slate-500 text-[11px]">Support</span>
+      </motion.div>
+
+      {/* LEFT */}
+      <motion.div
+        initial={{ opacity: 0, x: 12 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1.35, duration: 0.55, ease: [0.22,1,0.36,1] }}
+        className="absolute flex items-center gap-2 rounded-full border border-blue-500/20 px-4 py-2 whitespace-nowrap"
+        style={{
+          left: -12, top: "50%", transform: "translateX(-100%) translateY(-50%)",
+          background: "#060B14", boxShadow: "0 4px 24px rgba(0,0,0,0.55)",
+          animation: "floatX 7s ease-in-out 1.35s infinite",
+          animationDirection: "reverse",
+        }}
+      >
+        <Shield size={12} className="text-blue-400 shrink-0" strokeWidth={1.5} />
+        <span className="text-white text-[13px] font-extrabold">100%</span>
+        <span className="text-slate-500 text-[11px]">Reliable</span>
+      </motion.div>
+    </div>
+  );
+}
 
 /* ─── Lightweight service slider (CSS-only transitions, no images) ─── */
 const SLIDES = [
@@ -69,32 +280,26 @@ function ServiceSlider() {
 
   return (
     <section className="py-16 md:py-24 bg-[#060B14] relative overflow-hidden">
-      {/* subtle top/bottom divider lines */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
       <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
       <div className="container mx-auto px-6 lg:px-16">
-        {/* Label */}
         <div className="text-center mb-10">
           <span className="section-label">What We Do</span>
         </div>
 
-        {/* Slider card */}
         <div
           className="relative rounded-3xl border border-white/[0.07] overflow-hidden cursor-default select-none"
           style={{ background: "linear-gradient(135deg,#0D1424 0%,#0A0F1E 100%)" }}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          {/* Ambient glow that changes per slide */}
           <div
             className="absolute inset-0 pointer-events-none transition-all duration-700"
             style={{ background: `radial-gradient(ellipse 60% 60% at 70% 50%, ${slide.glow}, transparent)` }}
           />
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-0 min-h-[320px]">
-
-            {/* Left: slide tabs */}
             <div className="lg:col-span-4 border-b lg:border-b-0 lg:border-r border-white/[0.06] flex lg:flex-col">
               {SLIDES.map((s, i) => (
                 <button
@@ -106,7 +311,6 @@ function ServiceSlider() {
                       : "text-slate-600 hover:text-slate-400 hover:bg-white/[0.02]"
                   }`}
                 >
-                  {/* Active indicator bar */}
                   {active === i && (
                     <span className="absolute left-0 top-3 bottom-3 w-[3px] rounded-r-full bg-gradient-to-b from-blue-400 to-blue-600" />
                   )}
@@ -120,13 +324,11 @@ function ServiceSlider() {
               ))}
             </div>
 
-            {/* Right: slide content */}
             <div className="lg:col-span-8 p-8 md:p-10 lg:p-14 flex flex-col justify-center">
               <div
                 key={active}
                 style={{ animation: "fadeSlideUp 0.45s ease forwards" }}
               >
-                {/* Icon */}
                 <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${slide.accent} flex items-center justify-center text-white mb-8 shadow-[0_8px_24px_rgba(37,99,235,0.25)]`}>
                   <slide.Icon size={26} strokeWidth={1.5} />
                 </div>
@@ -144,7 +346,6 @@ function ServiceSlider() {
             </div>
           </div>
 
-          {/* Dots + progress bar */}
           <div className="relative z-10 flex items-center justify-between px-8 md:px-14 py-5 border-t border-white/[0.05]">
             <div className="flex items-center gap-2.5">
               {SLIDES.map((_, i) => (
@@ -178,65 +379,70 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════════
           HERO
       ══════════════════════════════════════════════════════════ */}
-      <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-[#060B14]">
+      <section id="home" className="relative min-h-screen flex items-center bg-[#060B14]">
 
-        {/* ─── Background ─────────────────────────────────── */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          {/* Blue glow right */}
+        {/* ─── Background (own overflow-hidden so badges aren't clipped) ── */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <div className="absolute inset-0" style={{
             background: "radial-gradient(ellipse 65% 60% at 85% 30%, rgba(37,99,235,0.22) 0%, rgba(37,99,235,0.04) 50%, transparent 70%)"
           }} />
-          {/* Indigo glow left */}
           <div className="absolute inset-0" style={{
             background: "radial-gradient(ellipse 50% 40% at 5% 90%, rgba(79,70,229,0.13) 0%, transparent 60%)"
           }} />
-          {/* Dot grid */}
           <div className="absolute inset-0" style={{
             backgroundImage: "radial-gradient(circle, rgba(37,99,235,0.14) 1px, transparent 1px)",
             backgroundSize: "44px 44px",
           }} />
-          {/* Bottom fade */}
           <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#060B14] to-transparent" />
         </div>
 
         {/* ─── Content ─────────────────────────────────────── */}
-        <div className="container relative z-10 mx-auto px-6 lg:px-16 pt-32 pb-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12 items-center">
+        <div className="container relative z-10 mx-auto px-6 lg:px-16 pt-28 pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center">
 
             {/* LEFT ─ copy */}
             <div>
-              {/* Status badge */}
-              <div
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05, duration: 0.5 }}
                 className="inline-flex items-center gap-2.5 rounded-full border border-blue-500/20 bg-blue-500/[0.07] px-4 py-2 text-sm font-medium text-blue-300 mb-8"
-                style={{ animation: "fadeSlideUp 0.5s ease 0.05s both" }}
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-blue-400 shrink-0" style={{ animation: "glowPulse 2s ease-in-out infinite" }} />
+                <motion.span
+                  animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  className="h-1.5 w-1.5 rounded-full bg-blue-400 shrink-0"
+                />
                 A Connected Lifecycle · 10+ Years of Experience
-              </div>
+              </motion.div>
 
-              {/* Headline */}
-              <h1
+              <motion.h1
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.18, duration: 0.6 }}
                 className="font-extrabold tracking-tight text-white leading-[1.05] mb-6"
-                style={{ fontSize: "clamp(2.4rem, 5.5vw, 5.2rem)", animation: "fadeSlideUp 0.6s ease 0.2s both" }}
+                style={{ fontSize: "clamp(2.2rem, 5vw, 5rem)" }}
               >
                 Connecting<br />
                 Customers With<br />
                 <span className="gradient-text">Reliable Solutions</span>
-              </h1>
+              </motion.h1>
 
-              {/* Sub */}
-              <p
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.38, duration: 0.55 }}
                 className="text-lg text-slate-400 mb-10 max-w-lg leading-relaxed"
-                style={{ animation: "fadeSlideUp 0.55s ease 0.45s both" }}
               >
                 ZSolutionz helps customers find reliable home internet and connectivity
                 solutions — professional service, dedicated support, real results.
-              </p>
+              </motion.p>
 
-              {/* CTAs */}
-              <div
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.55, duration: 0.5 }}
                 className="flex flex-col sm:flex-row gap-3 mb-10"
-                style={{ animation: "fadeSlideUp 0.5s ease 0.6s both" }}
               >
                 <Link href="/contact"
                   className="group inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 text-white font-semibold text-sm h-12 px-8 shadow-[0_0_32px_rgba(37,99,235,0.45)] hover:bg-blue-500 hover:shadow-[0_0_40px_rgba(37,99,235,0.6)] transition-all duration-300"
@@ -249,116 +455,45 @@ export default function HomePage() {
                 >
                   Join Our Team
                 </Link>
-              </div>
+              </motion.div>
 
-              {/* Trust row */}
-              <div
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.72, duration: 0.5 }}
                 className="flex flex-wrap gap-3"
-                style={{ animation: "fadeSlideUp 0.5s ease 0.78s both" }}
               >
                 {[
-                  { icon: Shield,     label: "Trusted Service"       },
-                  { icon: Award,      label: "10+ Years Experience"   },
-                  { icon: Users,      label: "500+ Happy Customers"   },
+                  { icon: Shield,  label: "Trusted Service"      },
+                  { icon: Award,   label: "10+ Years Experience"  },
+                  { icon: Users,   label: "500+ Happy Customers"  },
                 ].map((b, i) => (
                   <div key={i} className="flex items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.025] px-3.5 py-1.5">
                     <b.icon size={12} className="text-blue-400" strokeWidth={1.5} />
                     <span className="text-slate-400 text-xs font-medium">{b.label}</span>
                   </div>
                 ))}
-              </div>
+              </motion.div>
             </div>
 
             {/* RIGHT ─ orbital visualization */}
-            <div
-              className="hidden lg:flex items-center justify-center"
-              style={{ animation: "fadeSlideUp 0.7s ease 0.4s both" }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.35, duration: 0.7, ease: [0.22,1,0.36,1] }}
+              className="hidden md:flex items-center justify-center py-12"
             >
-              <div className="relative" style={{ width: 380, height: 380 }}>
-
-                {/* Concentric rings */}
-                <div className="absolute inset-0 rounded-full border border-white/[0.05]" />
-                <div className="absolute rounded-full border border-blue-500/[0.09]" style={{ inset: 32 }} />
-                <div className="absolute rounded-full border border-blue-500/[0.14]" style={{ inset: 64 }} />
-                <div className="absolute rounded-full border border-blue-500/[0.2]"  style={{ inset: 96 }} />
-
-                {/* Inner glow */}
-                <div className="absolute rounded-full" style={{
-                  inset: 96,
-                  background: "radial-gradient(circle, rgba(37,99,235,0.18) 0%, transparent 70%)"
-                }} />
-
-                {/* Center icon */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div
-                    className="flex items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700"
-                    style={{
-                      width: 72, height: 72,
-                      boxShadow: "0 0 0 12px rgba(37,99,235,0.08), 0 0 60px rgba(37,99,235,0.38)"
-                    }}
-                  >
-                    <Globe size={30} className="text-white" strokeWidth={1.5} />
-                  </div>
-                </div>
-
-                {/* Dashed connector lines (SVG) */}
-                <svg className="absolute inset-0" width="380" height="380" viewBox="0 0 380 380" fill="none">
-                  <line x1="190" y1="12"  x2="190" y2="86"  stroke="rgba(37,99,235,0.28)" strokeDasharray="3 4" strokeLinecap="round" />
-                  <line x1="368" y1="190" x2="294" y2="190" stroke="rgba(37,99,235,0.28)" strokeDasharray="3 4" strokeLinecap="round" />
-                  <line x1="190" y1="368" x2="190" y2="294" stroke="rgba(37,99,235,0.28)" strokeDasharray="3 4" strokeLinecap="round" />
-                  <line x1="12"  y1="190" x2="86"  y2="190" stroke="rgba(37,99,235,0.28)" strokeDasharray="3 4" strokeLinecap="round" />
-                </svg>
-
-                {/* Glowing ring dots */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1 w-2 h-2 rounded-full bg-blue-400"
-                  style={{ boxShadow: "0 0 10px 2px rgba(96,165,250,0.85)" }} />
-                <div className="absolute right-0 top-1/2 translate-x-1 -translate-y-1/2 w-2 h-2 rounded-full bg-blue-500"
-                  style={{ boxShadow: "0 0 10px 2px rgba(37,99,235,0.85)" }} />
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1 w-2 h-2 rounded-full bg-indigo-400"
-                  style={{ boxShadow: "0 0 10px 2px rgba(129,140,248,0.85)" }} />
-                <div className="absolute left-0 top-1/2 -translate-x-1 -translate-y-1/2 w-2 h-2 rounded-full bg-cyan-400"
-                  style={{ boxShadow: "0 0 10px 2px rgba(34,211,238,0.85)" }} />
-
-                {/* Stat badges — cardinal positions */}
-                {/* TOP */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full -mt-3 flex items-center gap-2 rounded-full border border-blue-500/20 px-4 py-2 whitespace-nowrap"
-                  style={{ background: "#060B14", boxShadow: "0 4px 24px rgba(0,0,0,0.5)" }}>
-                  <Award size={12} className="text-blue-400" strokeWidth={1.5} />
-                  <span className="text-white text-[13px] font-extrabold">10+</span>
-                  <span className="text-slate-500 text-[11px]">Yrs Experience</span>
-                </div>
-
-                {/* RIGHT */}
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full ml-3 flex items-center gap-2 rounded-full border border-blue-500/20 px-4 py-2 whitespace-nowrap"
-                  style={{ background: "#060B14", boxShadow: "0 4px 24px rgba(0,0,0,0.5)", marginLeft: 12 }}>
-                  <Users size={12} className="text-blue-400" strokeWidth={1.5} />
-                  <span className="text-white text-[13px] font-extrabold">500+</span>
-                  <span className="text-slate-500 text-[11px]">Clients</span>
-                </div>
-
-                {/* BOTTOM */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full mt-3 flex items-center gap-2 rounded-full border border-blue-500/20 px-4 py-2 whitespace-nowrap"
-                  style={{ background: "#060B14", boxShadow: "0 4px 24px rgba(0,0,0,0.5)", marginTop: 12 }}>
-                  <Headphones size={12} className="text-blue-400" strokeWidth={1.5} />
-                  <span className="text-white text-[13px] font-extrabold">24/7</span>
-                  <span className="text-slate-500 text-[11px]">Support</span>
-                </div>
-
-                {/* LEFT */}
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full flex items-center gap-2 rounded-full border border-blue-500/20 px-4 py-2 whitespace-nowrap"
-                  style={{ background: "#060B14", boxShadow: "0 4px 24px rgba(0,0,0,0.5)", marginRight: 12 }}>
-                  <Shield size={12} className="text-blue-400" strokeWidth={1.5} />
-                  <span className="text-white text-[13px] font-extrabold">100%</span>
-                  <span className="text-slate-500 text-[11px]">Reliable</span>
-                </div>
+              {/* Padding wrapper absorbs badge overflow so section overflow-hidden doesn't clip */}
+              <div className="relative flex items-center justify-center" style={{ padding: "56px 80px" }}>
+                <OrbitalViz />
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
           <span className="text-[10px] text-slate-600 uppercase tracking-[0.25em]">Scroll</span>
           <motion.div
             animate={{ scaleY: [1, 0.35, 1] }}
@@ -518,7 +653,6 @@ export default function HomePage() {
         <div className="container mx-auto px-6 lg:px-16 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
-            {/* Image */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeLeft} className="relative order-2 lg:order-1">
               <motion.div
                 className="relative rounded-3xl overflow-hidden aspect-[4/3]"
@@ -526,13 +660,11 @@ export default function HomePage() {
               >
                 <img src={missionBg} alt="Our Mission" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#0A0F1E]/70 via-[#0A0F1E]/20 to-transparent" />
-                {/* Scan line overlay */}
                 <div className="absolute inset-0 pointer-events-none" style={{
                   backgroundImage: "linear-gradient(transparent 50%, rgba(37,99,235,0.03) 50%)",
                   backgroundSize: "100% 4px",
                 }} />
               </motion.div>
-              {/* Floating quote */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8, y: 20 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -549,7 +681,6 @@ export default function HomePage() {
               </motion.div>
             </motion.div>
 
-            {/* Text */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeRight} className="order-1 lg:order-2">
               <span className="section-label">Our Mission</span>
               <h2 className="font-extrabold text-white leading-tight mb-8" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>
@@ -665,7 +796,6 @@ export default function HomePage() {
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
               className="rounded-3xl border border-blue-500/20 bg-gradient-to-br from-blue-600/12 via-blue-900/6 to-transparent p-8 md:p-12 lg:p-20 relative overflow-hidden"
             >
-              {/* Animated border glow */}
               <div className="absolute inset-0 rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-700"
                 style={{ background: "linear-gradient(135deg, rgba(37,99,235,0.08), transparent, rgba(37,99,235,0.08))" }}
               />
