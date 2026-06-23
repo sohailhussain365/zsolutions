@@ -5,7 +5,6 @@ import {
   ArrowRight, Target, Eye, Award, Users
 } from "lucide-react";
 import { AnimatedCounter } from "@/components/animated-counter";
-import { FloatingOrbs } from "@/components/floating-orbs";
 import aboutTechBg from "@/assets/about-tech.png";
 import missionBg from "@/assets/mission-bg.png";
 import heroBg from "@/assets/hero-bg.png";
@@ -30,7 +29,6 @@ export default function AboutPage() {
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.06]"
           style={{ backgroundImage: `linear-gradient(rgba(37,99,235,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.5) 1px, transparent 1px)`, backgroundSize: "64px 64px" }}
         />
-        <FloatingOrbs />
 
         <div className="container relative z-10 mx-auto px-6 lg:px-12">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] }}>
@@ -56,7 +54,6 @@ export default function AboutPage() {
 
       {/* ── WHO WE ARE ──────────────────────────────────────── */}
       <section className="py-16 md:py-32 bg-[#0A0F1E] relative overflow-hidden">
-        <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeLeft}>
@@ -75,7 +72,7 @@ export default function AboutPage() {
                   { num: 10, suffix: "+", label: "Years of Experience" },
                   { num: 500, suffix: "+", label: "Customers Served" },
                 ].map((s, i) => (
-                  <motion.div key={i} whileHover={{ y: -4, scale: 1.02 }} className="glass-card rounded-2xl p-6 text-center group cursor-default">
+                  <motion.div key={i} className="glass-card rounded-2xl p-6 text-center group cursor-default">
                     <div className="text-3xl font-extrabold text-blue-500 mb-1">
                       <AnimatedCounter target={s.num} suffix={s.suffix} duration={1600} />
                     </div>
@@ -92,7 +89,6 @@ export default function AboutPage() {
                 src={aboutTechBg}
                 alt="ZSolutionz Technology"
                 className="w-full h-full object-cover"
-                whileHover={{ scale: 1.04 }}
                 transition={{ duration: 0.5 }}
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/50 to-transparent" />
@@ -120,7 +116,6 @@ export default function AboutPage() {
 
       {/* ── MISSION ─────────────────────────────────────────── */}
       <section className="py-16 md:py-32 bg-[#0F172A] border-y border-white/[0.07] relative overflow-hidden">
-        <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeLeft}>
@@ -140,7 +135,6 @@ export default function AboutPage() {
                   "Focus on quality service and customer experience",
                 ].map((item, i) => (
                   <motion.li key={i} variants={fadeUp}
-                    whileHover={{ x: 4 }}
                     className="flex items-center gap-4 glass-card rounded-xl p-4 hover:border-blue-500/30 transition-all duration-300"
                   >
                     <CheckCircle className="text-blue-500 shrink-0" size={18} />
@@ -153,8 +147,7 @@ export default function AboutPage() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeRight}
               className="relative rounded-3xl overflow-hidden aspect-[4/3]"
             >
-              <motion.img src={missionBg} alt="Our Mission" className="w-full h-full object-cover"
-                whileHover={{ scale: 1.04 }} transition={{ duration: 0.5 }} />
+              <motion.img src={missionBg} alt="Our Mission" className="w-full h-full object-cover" transition={{ duration: 0.5 }} />
               <div className="absolute inset-0 bg-[#0A0F1E]/60" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] via-transparent to-transparent" />
               <motion.div
@@ -175,7 +168,6 @@ export default function AboutPage() {
 
       {/* ── VISION / MISSION / PURPOSE ──────────────────────── */}
       <section className="py-16 md:py-32 bg-[#0A0F1E] relative overflow-hidden">
-        <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-12 md:mb-24">
             <span className="section-label">Our Foundation</span>
@@ -206,7 +198,6 @@ export default function AboutPage() {
 
       {/* ── CORE VALUES ─────────────────────────────────────── */}
       <section className="py-16 md:py-32 bg-[#0F172A] border-t border-white/[0.07] relative overflow-hidden">
-        <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-12 md:mb-24">
             <span className="section-label">What We Stand For</span>
@@ -239,7 +230,6 @@ export default function AboutPage() {
 
       {/* ── CTA ─────────────────────────────────────────────── */}
       <section className="py-12 md:py-24 bg-[#0A0F1E] border-t border-white/[0.07] relative overflow-hidden">
-        <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             className="rounded-3xl border border-blue-500/20 bg-gradient-to-br from-blue-600/12 via-blue-900/6 to-transparent p-8 md:p-12 lg:p-16 text-center relative overflow-hidden"
