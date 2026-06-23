@@ -23,7 +23,7 @@ export default function JoinPage() {
     <div className="flex flex-col w-full overflow-x-hidden">
 
       {/* ── HERO ──────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative min-h-[65vh] flex items-end pb-20 pt-40 overflow-hidden">
+      <section ref={heroRef} className="relative min-h-[65vh] flex items-end pb-16 pt-32 md:pb-20 md:pt-40 overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0 z-0">
           <img src={joinBg} alt="" className="w-full h-full object-cover object-center scale-110" />
           <div className="absolute inset-0 bg-[#0A0F1E]/82" />
@@ -45,7 +45,7 @@ export default function JoinPage() {
               <span className="h-2 w-2 rounded-full bg-blue-400 animate-pulse" />
               We Are Hiring
             </div>
-            <h1 className="font-extrabold text-white tracking-tight leading-[1.03] mb-6" style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}>
+            <h1 className="font-extrabold text-white tracking-tight leading-[1.03] mb-6" style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}>
               Build Your Career<br />With{" "}
               <span className="gradient-text">ZSolutionz</span>
             </h1>
@@ -57,10 +57,10 @@ export default function JoinPage() {
       </section>
 
       {/* ── WHY WORK WITH US ────────────────────────────────── */}
-      <section className="py-32 bg-[#0A0F1E] relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-[#0A0F1E] relative overflow-hidden">
         <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-24">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-12 md:mb-24">
             <span className="section-label">Why ZSolutionz</span>
             <h2 className="font-extrabold text-white mb-6" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>Why Work With Us</h2>
             <p className="text-slate-400 text-lg">We're not just offering jobs — we're offering careers. Here's what makes ZSolutionz a place where people thrive.</p>
@@ -88,10 +88,10 @@ export default function JoinPage() {
       </section>
 
       {/* ── TEAM CULTURE ───────────────────────────────────── */}
-      <section className="py-32 bg-[#0F172A] border-y border-white/[0.07] relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-[#0F172A] border-y border-white/[0.07] relative overflow-hidden">
         <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeLeft}>
               <span className="section-label">Our Culture</span>
               <h2 className="font-extrabold text-white leading-tight mb-8" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>
@@ -144,10 +144,10 @@ export default function JoinPage() {
       </section>
 
       {/* ── OPEN POSITIONS ──────────────────────────────────── */}
-      <section className="py-32 bg-[#0A0F1E] relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-[#0A0F1E] relative overflow-hidden">
         <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-24">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-12 md:mb-24">
             <span className="section-label">Careers</span>
             <h2 className="font-extrabold text-white mb-6" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>Current Openings</h2>
             <p className="text-slate-400 text-lg">Explore our open positions and find the role that matches your skills and ambitions.</p>
@@ -237,10 +237,10 @@ export default function JoinPage() {
       </section>
 
       {/* ── BENEFITS GRID ───────────────────────────────────── */}
-      <section className="py-28 bg-[#0F172A] border-t border-white/[0.07] relative overflow-hidden">
+      <section className="py-14 md:py-28 bg-[#0F172A] border-t border-white/[0.07] relative overflow-hidden">
         <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-20">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-10 md:mb-20">
             <span className="section-label">Employee Benefits</span>
             <h2 className="font-extrabold text-white mb-6" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)" }}>What You Can Expect</h2>
           </motion.div>
@@ -271,11 +271,11 @@ export default function JoinPage() {
       </section>
 
       {/* ── APPLICATION CTA ─────────────────────────────────── */}
-      <section className="py-28 bg-[#0A0F1E] border-t border-white/[0.07] relative overflow-hidden">
+      <section className="py-14 md:py-28 bg-[#0A0F1E] border-t border-white/[0.07] relative overflow-hidden">
         <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            className="rounded-3xl border border-blue-500/20 bg-gradient-to-br from-blue-600/12 via-blue-900/6 to-transparent p-12 md:p-18 text-center relative overflow-hidden"
+            className="rounded-3xl border border-blue-500/20 bg-gradient-to-br from-blue-600/12 via-blue-900/6 to-transparent p-8 md:p-12 lg:p-18 text-center relative overflow-hidden"
           >
             <div className="absolute inset-0 rounded-3xl" style={{ background: "radial-gradient(circle at 50% 0%, rgba(37,99,235,0.1), transparent 70%)" }} />
             <span className="section-label relative z-10">Get Started</span>
