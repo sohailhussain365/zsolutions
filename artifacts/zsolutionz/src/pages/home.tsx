@@ -7,8 +7,6 @@ import {
   Zap, Award, TrendingUp, Star
 } from "lucide-react";
 import { AnimatedCounter } from "@/components/animated-counter";
-import { FloatingOrbs, HeroParticles } from "@/components/floating-orbs";
-import heroBg from "@/assets/hero-bg.png";
 import missionBg from "@/assets/mission-bg.png";
 import aboutTechBg from "@/assets/about-tech.png";
 
@@ -24,28 +22,6 @@ const stagger = {
 const fadeLeft  = { hidden: { opacity: 0, x: -24 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
 const fadeRight = { hidden: { opacity: 0, x: 24 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
 
-/* Word-reveal split animation */
-function WordReveal({ text, className = "" }: { text: string; className?: string }) {
-  const words = text.split(" ");
-  return (
-    <motion.span
-      className={className}
-      variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07 } } }}
-      initial="hidden"
-      animate="visible"
-    >
-      {words.map((w, i) => (
-        <motion.span
-          key={i}
-          className="inline-block mr-[0.25em]"
-          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22,1,0.36,1] as [number, number, number, number] } } }}
-        >
-          {w}
-        </motion.span>
-      ))}
-    </motion.span>
-  );
-}
 
 
 /* ─── Lightweight service slider (CSS-only transitions, no images) ─── */
@@ -202,26 +178,18 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════════
           HERO
       ══════════════════════════════════════════════════════════ */}
-      <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Parallax bg */}
-        <div className="absolute inset-0 z-0">
-          <img src={heroBg} alt="" className="w-full h-full object-cover object-center hero-bg-zoom" fetchPriority="high" decoding="async" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0F1E]/97 via-[#0A0F1E]/82 to-[#0A0F1E]/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] via-transparent to-[#0A0F1E]/30" />
-        </div>
-
-        {/* Animated grid */}
-        <div className="absolute inset-0 z-0 pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(rgba(37,99,235,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.06) 1px, transparent 1px)`,
+      <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-[#060B14]">
+        {/* CSS gradient hero — zero image download, zero extra animations */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0" style={{
+            background: "radial-gradient(ellipse 80% 70% at 72% 38%, rgba(37,99,235,0.15) 0%, transparent 58%), radial-gradient(ellipse 50% 50% at 15% 85%, rgba(79,70,229,0.08) 0%, transparent 55%), #060B14"
+          }} />
+          <div className="absolute inset-0 opacity-60" style={{
+            backgroundImage: "linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px)",
             backgroundSize: "80px 80px",
-            animation: "gridDrift 25s linear infinite",
-          }}
-        />
-
-        {/* Floating orbs & particles */}
-        <FloatingOrbs />
-        <HeroParticles />
+          }} />
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#060B14] to-transparent" />
+        </div>
 
         <div className="container relative z-10 mx-auto px-6 lg:px-16 pt-36 pb-28">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
@@ -229,43 +197,36 @@ export default function HomePage() {
             {/* ── Left copy ── */}
             <div className="lg:col-span-7">
               {/* Badge */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.85 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+              <div
                 className="inline-flex items-center gap-3 rounded-full border border-blue-500/25 bg-blue-500/8 px-5 py-2.5 text-sm font-medium text-blue-300 mb-10 backdrop-blur-sm"
+                style={{ animation: "fadeSlideUp 0.5s ease 0.1s both" }}
               >
                 <span className="h-2 w-2 rounded-full bg-blue-400" style={{ animation: "glowPulse 2s ease-in-out infinite" }} />
                 A Connected Lifecycle · 10+ Years of Experience
-              </motion.div>
+              </div>
 
-              {/* Headline with word reveal */}
-              <h1 className="font-extrabold tracking-tight text-white leading-[1.03] mb-8" style={{ fontSize: "clamp(2rem, 6vw, 5.5rem)" }}>
-                <WordReveal text="Connecting" />
-                <br />
-                <WordReveal text="Customers With" />
-                <br />
-                <span className="gradient-text">
-                  <WordReveal text="Reliable Solutions" />
-                </span>
+              {/* Headline */}
+              <h1
+                className="font-extrabold tracking-tight text-white leading-[1.03] mb-8"
+                style={{ fontSize: "clamp(2rem, 6vw, 5.5rem)", animation: "fadeSlideUp 0.65s ease 0.25s both" }}
+              >
+                Connecting<br />
+                Customers With<br />
+                <span className="gradient-text">Reliable Solutions</span>
               </h1>
 
               {/* Sub */}
-              <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
+              <p
                 className="text-lg md:text-xl text-slate-400 mb-12 max-w-xl leading-relaxed"
+                style={{ animation: "fadeSlideUp 0.6s ease 0.55s both" }}
               >
                 ZSolutionz helps customers find reliable home internet and connectivity solutions with a simple, hassle-free process. Professional service. Dedicated support. Real results.
-              </motion.p>
+              </p>
 
               {/* CTAs */}
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.75 }}
+              <div
                 className="flex flex-col sm:flex-row gap-4"
+                style={{ animation: "fadeSlideUp 0.5s ease 0.7s both" }}
               >
                 <Link href="/contact"
                   className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-blue-600 text-white font-semibold text-base h-14 px-10 btn-glow shadow-[0_0_40px_rgba(37,99,235,0.45)]"
@@ -278,32 +239,27 @@ export default function HomePage() {
                 >
                   Join Our Team
                 </Link>
-              </motion.div>
+              </div>
 
               {/* Trust badges */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.0 }}
+              <div
                 className="flex flex-wrap gap-4 mt-10"
+                style={{ animation: "fadeSlideUp 0.5s ease 0.95s both" }}
               >
                 {[
                   { icon: Shield, label: "Trusted Service" },
                   { icon: Award,  label: "10+ Years Experience" },
                   { icon: Users,  label: "500+ Happy Customers" },
                 ].map((b, i) => (
-                  <motion.div
+                  <div
                     key={i}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1.1 + i * 0.1 }}
                     className="flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] backdrop-blur-sm px-4 py-2"
                   >
                     <b.icon size={13} className="text-blue-400" strokeWidth={1.5} />
                     <span className="text-slate-400 text-xs font-medium">{b.label}</span>
-                  </motion.div>
+                  </div>
                 ))}
-              </motion.div>
+              </div>
             </div>
 
             {/* ── Right: floating stat cards ── */}
@@ -318,13 +274,9 @@ export default function HomePage() {
                 { num: 500, suffix: "+", label: "Happy Customers",     sub: "Served nationwide",   icon: Users,     delay: 0.2 },
                 { num: 24, suffix: "/7", label: "Support Available",   sub: "Always here for you", icon: Headphones,delay: 0.3 },
               ].map((s, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: 40, y: 20 }}
-                  animate={{ opacity: 1, x: 0, y: 0 }}
-                  transition={{ delay: 0.7 + i * 0.15, duration: 0.6, ease: [0.22,1,0.36,1] as [number, number, number, number] }}
-                  whileHover={{ scale: 1.03, y: -4 }}
-                  className="glass-card rounded-2xl p-6 flex items-center gap-5 cursor-default group"
+                <div
+                key={i}
+                className="glass-card rounded-2xl p-6 flex items-center gap-5 cursor-default group"
                 >
                   <div className="h-12 w-12 rounded-xl bg-blue-600/12 flex items-center justify-center text-blue-400 shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
                     <s.icon size={22} strokeWidth={1.5} />
@@ -413,7 +365,6 @@ export default function HomePage() {
           CONNECTED LIFECYCLE
       ══════════════════════════════════════════════════════════ */}
       <section className="py-16 md:py-32 bg-[#0D1424] relative overflow-hidden">
-        <FloatingOrbs />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
         <div className="container mx-auto px-6 lg:px-16 relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-4xl mx-auto text-center mb-12 md:mb-24">
@@ -458,7 +409,6 @@ export default function HomePage() {
           WHY CHOOSE US
       ══════════════════════════════════════════════════════════ */}
       <section className="py-16 md:py-32 bg-[#0A0F1E] relative overflow-hidden">
-        <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-16 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
@@ -506,7 +456,6 @@ export default function HomePage() {
           MISSION — Bold two-column split
       ══════════════════════════════════════════════════════════ */}
       <section className="py-16 md:py-32 bg-[#0D1424] relative overflow-hidden">
-        <FloatingOrbs />
         <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
         <div className="container mx-auto px-6 lg:px-16 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
@@ -515,7 +464,6 @@ export default function HomePage() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeLeft} className="relative order-2 lg:order-1">
               <motion.div
                 className="relative rounded-3xl overflow-hidden aspect-[4/3]"
-                whileHover={{ scale: 1.01 }}
                 transition={{ duration: 0.4 }}
               >
                 <img src={missionBg} alt="Our Mission" className="w-full h-full object-cover" />
@@ -562,7 +510,6 @@ export default function HomePage() {
                 ].map((item, i) => (
                   <motion.li key={i} variants={fadeUp} className="flex items-center gap-3.5">
                     <motion.div
-                      whileHover={{ scale: 1.2 }}
                       className="h-6 w-6 rounded-full bg-blue-600/15 flex items-center justify-center shrink-0"
                     >
                       <CheckCircle className="text-blue-500" size={14} />
@@ -586,7 +533,6 @@ export default function HomePage() {
           SERVICES / WHO WE ARE
       ══════════════════════════════════════════════════════════ */}
       <section className="py-16 md:py-32 bg-[#0A0F1E] relative overflow-hidden">
-        <FloatingOrbs />
         <div className="container mx-auto px-6 lg:px-16 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeLeft}>
@@ -606,7 +552,7 @@ export default function HomePage() {
                   { icon: Shield, label: "Reliable" },
                   { icon: TrendingUp, label: "Growing" },
                 ].map((item, i) => (
-                  <motion.div key={i} whileHover={{ y: -4, scale: 1.03 }} className="glass-card rounded-xl p-4 text-center cursor-default">
+                  <motion.div key={i} className="glass-card rounded-xl p-4 text-center cursor-default">
                     <item.icon size={20} className="text-blue-500 mx-auto mb-2" strokeWidth={1.5} />
                     <span className="text-slate-300 text-xs font-semibold">{item.label}</span>
                   </motion.div>
@@ -627,7 +573,6 @@ export default function HomePage() {
             </motion.div>
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeRight}
-              whileHover={{ scale: 1.01 }}
               transition={{ duration: 0.4 }}
               className="relative rounded-3xl overflow-hidden aspect-[4/3]"
             >
@@ -655,7 +600,6 @@ export default function HomePage() {
           CAREERS CTA
       ══════════════════════════════════════════════════════════ */}
       <section className="py-16 md:py-32 bg-[#0D1424] relative overflow-hidden">
-        <FloatingOrbs />
         <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
         <div className="container mx-auto px-6 lg:px-16 relative z-10">
           <div className="max-w-5xl mx-auto">
