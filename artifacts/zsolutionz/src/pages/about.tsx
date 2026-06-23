@@ -181,7 +181,6 @@ export default function AboutPage() {
               { icon: Users,  title: "Our Purpose", desc: "To build lasting relationships between customers and the technology solutions that empower them — creating value, trust, and connection that endures." },
             ].map((item, i) => (
               <motion.div key={i} variants={fadeUp}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
                 className="rounded-3xl bg-gradient-to-br from-blue-600/8 to-transparent border border-white/[0.07] p-10 hover:border-blue-500/35 hover:shadow-[0_0_50px_rgba(37,99,235,0.12)] transition-all duration-500 group relative overflow-hidden glass-card-shimmer"
               >
                 <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/0 to-transparent group-hover:via-blue-500/60 transition-all duration-500" />
@@ -212,7 +211,6 @@ export default function AboutPage() {
               { icon: Zap,           num: "04", title: "Continuous Improvement", desc: "We never stop evolving. Every interaction, every process, every service — we're always looking to do better." },
             ].map((val, i) => (
               <motion.div key={i} variants={fadeUp}
-                whileHover={{ y: -6, transition: { duration: 0.25 } }}
                 className="glass-card rounded-3xl p-8 group hover:border-blue-500/35 hover:shadow-[0_0_40px_rgba(37,99,235,0.1)] transition-all duration-300 relative overflow-hidden"
               >
                 <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/0 to-transparent group-hover:via-blue-500/50 transition-all duration-500" />
