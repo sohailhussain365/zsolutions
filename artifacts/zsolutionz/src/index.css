@@ -47,27 +47,32 @@
 }
 
 :root, .dark {
-  --background: 225 50% 8%;
-  --foreground: 210 40% 98%;
-  --card: 222 47% 11%;
-  --card-foreground: 210 40% 98%;
-  --card-border: 0 0% 100% / 0.07;
-  --popover: 215 32% 17%;
-  --popover-foreground: 210 40% 98%;
-  --popover-border: 0 0% 100% / 0.07;
-  --primary: 221 83% 53%;
+  --background: 226 52% 6%;
+  --foreground: 210 40% 97%;
+  --card: 223 50% 10%;
+  --card-foreground: 210 40% 97%;
+  --card-border: 0 0% 100% / 0.09;
+  --popover: 222 48% 13%;
+  --popover-foreground: 210 40% 97%;
+  --popover-border: 0 0% 100% / 0.09;
+  --primary: 220 85% 57%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 222 47% 11%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 215 32% 17%;
-  --muted-foreground: 215 20% 65%;
-  --accent: 215 32% 17%;
-  --accent-foreground: 210 40% 98%;
+  --secondary: 223 50% 10%;
+  --secondary-foreground: 210 40% 97%;
+  --muted: 222 45% 14%;
+  --muted-foreground: 215 25% 72%;
+  --accent: 222 45% 14%;
+  --accent-foreground: 210 40% 97%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 100%;
-  --border: 0 0% 100% / 0.07;
-  --input: 0 0% 100% / 0.07;
-  --ring: 221 83% 53%;
+  --border: 0 0% 100% / 0.09;
+  --input: 0 0% 100% / 0.09;
+  --ring: 220 85% 57%;
+  --primary-border: hsl(220 85% 48%);
+  --secondary-border: hsl(223 50% 18%);
+  --muted-border: hsl(222 45% 20%);
+  --accent-border: hsl(222 45% 20%);
+  --destructive-border: hsl(0 84.2% 52%);
 }
 
 @layer base {
@@ -150,21 +155,22 @@
 @layer utilities {
   /* Glass card */
   .glass-card {
-    background: rgba(255,255,255,0.028);
-    border: 1px solid rgba(255,255,255,0.07);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.048);
+    border: 1px solid rgba(255,255,255,0.10);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   }
   .glass-card:hover {
-    border-color: rgba(37,99,235,0.22);
+    border-color: rgba(59,130,246,0.30);
+    box-shadow: 0 0 0 1px rgba(59,130,246,0.08) inset;
   }
 
   /* Shimmer glass card — rotating gradient border on hover */
   .glass-card-shimmer {
     position: relative;
-    background: rgba(255,255,255,0.028);
-    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.048);
+    backdrop-filter: blur(16px);
   }
   .glass-card-shimmer::before {
     content: '';
@@ -224,7 +230,6 @@
   .btn-glow:active {
     transform: translateY(0);
   }
-
 
   /* Float animations */
   .animate-float-y { animation: floatY 5s ease-in-out infinite; }
